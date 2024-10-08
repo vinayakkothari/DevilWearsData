@@ -1,2 +1,2 @@
-# DevilWearsDtata
+# DevilWearsData
 M# project
