@@ -2,30 +2,35 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "../components/ui/Button"
 import { Input } from "../components/ui/Input"
+import Back from "../assets/Closet_Beige.jpeg"
+import { useNavigate } from "react-router-dom";
 
 // const aestheticOptions = [
-//   'Minimalist', 'Bohemian', 'Vintage', 'Streetwear', 
-//   'Preppy', 'Romantic', 'Edgy', 'Classic'
-// ]
+//     'Minimalist', 'Bohemian', 'Vintage', 'Streetwear',
+//     'Preppy', 'Romantic', 'Edgy', 'Classic'
+// ];
 
 const aestheticOptions = [
-       'Casual', 'Ethnic', 'Sports', 'Formal', 
-       'Party', 'Smart Casual'
-     ]
+    'Casual', 'Ethnic', 'Sports', 'Formal',
+    'Party', 'Smart Casual'
+]
 
 export default function SignUp() {
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
+        username: '',
         aesthetics: []
-    })
+    });
+
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setFormData(prev => ({ ...prev, [name]: value }))
-    }
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
 
     const handleAestheticToggle = (aesthetic) => {
         setFormData(prev => ({
@@ -33,23 +38,43 @@ export default function SignUp() {
             aesthetics: prev.aesthetics.includes(aesthetic)
                 ? prev.aesthetics.filter(a => a !== aesthetic)
                 : [...prev.aesthetics, aesthetic]
-        }))
-    }
+        }));
+    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
         if (step === 1) {
-            setStep(2)
+            setStep(2);
         } else {
-            // Here you would typically send the data to your backend
-            console.log('Form submitted:', formData)
-            // Redirect to dashboard or show success message
+            // Submit the data to the backend
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/signup', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                if (!response.ok) {
+                    const data = await response.json();
+                    throw new Error(data.message);
+                }
+
+                const data = await response.json();
+                console.log('Signup successful:', data);
+                // Redirect to dashboard
+                navigate('/dashboard');
+            } catch (error) {
+                console.error('Signup failed:', error);
+                alert('Something went wrong, please try again');
+            }
         }
-    }
+    };
 
     return (
         /*<div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">*/
-        <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: "Closet_beige.jpeg", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: {Back}, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -71,6 +96,14 @@ export default function SignUp() {
                                 transition={{ duration: 0.3 }}
                             >
                                 <div className="space-y-4">
+                                    <Input
+                                        type="text"
+                                        name="username"
+                                        placeholder="Username"
+                                        value={formData.username}
+                                        onChange={handleInputChange}
+                                        required
+                                    />
                                     <Input
                                         type="text"
                                         name="name"
@@ -108,7 +141,7 @@ export default function SignUp() {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-700">
                                     Select Your Aesthetic Preferences
                                 </h2>
-                                {<div className="grid grid-cols-2 gap-3 mb-6">
+                                <div className="grid grid-cols-2 gap-4 mb-6">
                                     {aestheticOptions.map((aesthetic) => (
                                         <Button
                                             key={aesthetic}
@@ -120,9 +153,7 @@ export default function SignUp() {
                                             {aesthetic}
                                         </Button>
                                     ))}
-                                </div> }
-                                
-
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -147,5 +178,5 @@ export default function SignUp() {
                 )}
             </motion.div>
         </div>
-    )
+    );
 }
