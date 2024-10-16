@@ -1,57 +1,15 @@
-import {Schema,model, models} from 'mongoose'
+import mongoose from 'mongoose';
 
-const UserSchema = new Schema(
-  {
-    email: String,
-   ref:{
-    type:Schema.Types.ObjectId,
-    ref:'Users'
-   },
-   password: String,
-    items: [ItemSchema],
-   count:{
-    type:Number,
-    default:0
-   },
-   subscribedOn: {type: Date, default: null},
-   isPro:{
-    type:Boolean,
-    default:false 
-   },
-   subscriptionEnds:{
-    type:Date,
-   }
-  },
-  {
-    timestamps: true,
-  }
-);
-
-UserSchema.pre("save", function (next) {
-  if (this.subscribedOn && this.isModified("subscribedOn")) {
-    this.subscriptionEnds = new Date(
-      this.subscribedOn.getTime() + 30 * 24 * 60 * 60 * 1000
-    );
-  }
-  next();
+const userSchema = new mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    points: { type: Number, default: 0 },
 });
-UserSchema.methods.canAddItem = function () {
-  const itemLimit = this.isPro ? Infinity : 20;
-  return this.count < itemLimit;
-};
 
-UserSchema.methods.addItem = async function () {
-  if (this.canAddItem()) {
-    this.count += 1;
-    await this.save();
-    return true;
-  }
-  return false;
-};
+// Ensure indexes are created
+userSchema.index({ username: 1 }, { unique: true });
+userSchema.index({ email: 1 }, { unique: true });
 
-UserSchema.methods.removeItem = async function () {
-  this.count = Math.max(0, this.count - 1);
-  await this.save();
-};
-
-export default models.User || model('User',UserSchema)
+const User = mongoose.model('User', userSchema);
+export default User;
