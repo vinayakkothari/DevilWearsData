@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Fashion Articles</title>
+</head>
+<body>
+    <h1>Top Fashion Articles</h1>
+    {% if articles %}
+        <ul>
+            {% for title, link in articles %}
+                <li><a href="{{ link }}" target="_blank">{{ title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No trending articles to display.</p>
+    {% endif %}
+</body>
+</html>
+
