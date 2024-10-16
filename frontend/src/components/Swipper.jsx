@@ -79,23 +79,23 @@ export default function FashionSwiper() {
     const currentItem = items[currentIndex]
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4">
-            <Card className="w-full max-w-sm overflow-hidden relative">
+        <div className="flex flex-col items-center justify-center h-screen p-4">
+            <Card className="w-full max-w-sm h-full overflow-hidden relative">
                 <motion.div
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
                     onDrag={handleDrag}
                     onDragEnd={handleDragEnd}
                     animate={controls}
-                    className="cursor-grab active:cursor-grabbing"
+                    className="cursor-grab active:cursor-grabbing h-full"
                     whileTap={{ scale: 0.95 }}
                     style={{ x: 0, rotate: 0 }}
                 >
-                    <CardContent className="p-0 relative">
+                    <CardContent className="p-0 relative h-full">
                         <img
                             src={currentItem.image}
                             alt={currentItem.name}
-                            className="w-full h-[400px] object-cover"
+                            className="w-full h-full object-cover"
                         />
                         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-4">
                             <h2 className="text-white text-xl font-bold">{currentItem.name}</h2>

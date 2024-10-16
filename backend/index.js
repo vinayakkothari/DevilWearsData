@@ -17,12 +17,14 @@ app.use(cors({
     credentials: true,
 }));
 
+// Routes
+app.use('/api/auth', authRoutes); // Authentication routes
+app.use('/api/images', imageRoutes); // Image routes
+
 // Start the server
 app.listen(PORT, () => {
     connectToMongoDb();
     console.log(`Server is running on port ${PORT}`);
 });
 
-// Routes
-app.use('/api/auth', authRoutes); // Authentication routes
-app.use('/api/images', imageRoutes); // Image routes
+

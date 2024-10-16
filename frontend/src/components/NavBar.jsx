@@ -18,8 +18,8 @@ import {
 
 const navItems = [
   { name: 'Home', icon: Home, href: '/' },
-  { name: 'Explore', icon: Search, href: '/explore' },
-  { name: 'Community', icon: Users, href: '/community' },
+  { name: 'Explore', icon: Search, href: '/upload' },
+  { name: 'Community', icon: Users, href: '/swipe' },
   { name: 'Trends', icon: TrendingUp, href: '/trends' },
   { name: 'Challenges', icon: Award, href: '/challenges' },
   { name: 'Forums', icon: MessageCircle, href: '/forums' },
