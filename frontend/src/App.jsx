@@ -5,6 +5,8 @@ import DisplayWardrobe from './pages/DisplayWardrobe.jsx';
 import UploadWardrobe from './pages/UploadWardrobe.jsx';
 import SignUp from './pages/SignUp.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import Fashion from './components/Swipper.jsx';
+import FashionSwiper from "./components/Swipper.jsx";
 
 function App() {
   return (
@@ -13,9 +15,10 @@ function App() {
         <Route path="/" element={<MainPage/>}></Route>
         <Route path="/login" element={<LogIn/>}></Route>
         <Route path="/signup" element={<SignUp/>}></Route>
-        <Route path='/wardrobe' element={<DisplayWardrobe/>}></Route>
+        <Route path='/display' element={<DisplayWardrobe/>}></Route>
         <Route path='/upload' element={<UploadWardrobe/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
+        <Route path='/swipe' element={<FashionSwiper/>}></Route>
       </Routes>
     </Router>
   );

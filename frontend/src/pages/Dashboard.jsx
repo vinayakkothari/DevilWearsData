@@ -9,7 +9,7 @@ import 'intro.js/introjs.css';
 // Function to fetch weather data
 const fetchWeather = async () => {
     const apiKey = '00eb636dc8f3517f196f5647f4aa8fe3'; // Replace with your OpenWeather API key
-    const city = 'Manipal'
+    const city = 'Manipal';
     const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
     );
@@ -28,9 +28,11 @@ export default function Dashboard() {
         setIsNavbarExpanded(!isNavbarExpanded);
     };
 
-    useEffect(() => {
+    const startTutorial = () => {
         introJs().start();
+    };
 
+    useEffect(() => {
         // Fetch weather data when the component loads
         const loadWeather = async () => {
             const weatherData = await fetchWeather();
@@ -57,6 +59,7 @@ export default function Dashboard() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
                         className="bg-matte-red rounded-xl shadow-md p-4"
+                        data-intro="This card shows today's weather in your city."
                     >
                         <Card className="p-5">
                             <CardHeader className="flex items-center">
@@ -82,6 +85,7 @@ export default function Dashboard() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
                         className="bg-matte-blue rounded-xl shadow-md p-4"
+                        data-intro="This card lists upcoming events."
                     >
                         <Card className="p-5">
                             <CardHeader className="flex items-center">
@@ -102,6 +106,7 @@ export default function Dashboard() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
                         className="bg-matte-green rounded-xl shadow-md p-4"
+                        data-intro="Check the leaderboard here."
                     >
                         <Card className="p-5">
                             <CardHeader className="flex items-center">
@@ -122,6 +127,7 @@ export default function Dashboard() {
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.7 }}
                         className="bg-matte-purple rounded-xl shadow-md p-4"
+                        data-intro="Overview of your profile."
                     >
                         <Card className="p-5">
                             <CardHeader className="flex items-center">
@@ -136,6 +142,15 @@ export default function Dashboard() {
                         </Card>
                     </motion.div>
                 </div>
+
+                {/* Start Tutorial Button */}
+                <button
+                    onClick={startTutorial}
+                    className="fixed bottom-8 right-8 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 transition"
+                    data-intro="Click here to start the tour!"
+                >
+                    Start Tutorial
+                </button>
             </div>
         </div>
     );
