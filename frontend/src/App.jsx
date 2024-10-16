@@ -6,6 +6,8 @@ import UploadWardrobe from './pages/UploadWardrobe.jsx';
 import SignUp from './pages/SignUp.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 import FashionSwiper from "./components/Swipper.jsx";
+import Community from "./pages/Community.jsx";
+import Messages from "./components/Chat.jsx";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path='/upload' element={<UploadWardrobe/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/swipe' element={<FashionSwiper/>}></Route>
+        <Route path='/community' element={<Community/>}></Route>
+        <Route path='/message' element={<Messages/>}></Route>
       </Routes>
     </Router>
   );
