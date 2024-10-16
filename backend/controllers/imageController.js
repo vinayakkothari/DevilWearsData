@@ -1,5 +1,5 @@
 import { removeBackground } from '../services/removeBgService.js';
-import { uploadToS3 } from '../services/s3UploadService.js';
+import { uploadToS3, getSignedUrlForS3Object,fetchImagesWithUrls } from '../services/s3Service.js';
 import mongoose from "mongoose";
 
 export async function handleImageUpload(req, res) {
@@ -44,6 +44,25 @@ export async function handleImageUpload(req, res) {
     
   } catch (error) {
     console.error("Error in handleImageUpload:", error);
+    return res.status(500).json({ message: error.message });
+  }
+}
+
+export async function getAllImages(_, res) {
+  try {
+    const db = mongoose.connection.db;
+    const collection = db.collection('clothings');
+
+    // Fetch all images from the collection
+    const images = await collection.find({}).toArray();   
+
+    // Fetch pre-signed URLs using the S3 service
+    const imagesWithUrls = await fetchImagesWithUrls(images);
+    console.log("got all images")
+    return res.status(200).json(imagesWithUrls); 
+    
+  } catch (error) {
+    console.error('Error in getAllImages:', error);
     return res.status(500).json({ message: error.message });
   }
 }
