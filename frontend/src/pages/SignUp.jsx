@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "../components/ui/Button"
 import { Input } from "../components/ui/Input"
+import Back from "../assets/Closet_Beige.jpeg"
 
 // const aestheticOptions = [
 //   'Minimalist', 'Bohemian', 'Vintage', 'Streetwear', 
@@ -49,7 +50,7 @@ export default function SignUp() {
 
     return (
         /*<div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">*/
-        <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: "Closet_beige.jpeg", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: {Back}, backgroundSize: 'cover', backgroundPosition: 'center' }}>
 
             <motion.div
                 initial={{ opacity: 0, y: -20 }}

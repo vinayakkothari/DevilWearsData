@@ -12,15 +12,14 @@ export async function handleImageUpload(req, res) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
 
-  const ext = file.mimetype.split("/")[1]; // Get file extension
-  const newFileName = `${Date.now()}.${ext}`; // Create a unique filename
+  const originalFileName = file.originalname;
 
   try {
     // Remove background from the image
     const imageWithoutBg = await removeBackground(file.buffer); // Assuming this function processes the file correctly
 
     // Upload the processed image to S3 and get the image URL
-    const imageUrl = await uploadToS3(imageWithoutBg, newFileName, file.mimetype);
+    const imageUrl = await uploadToS3(imageWithoutBg, originalFileName, file.mimetype);
 
     // Access MongoDB collection
     const db = mongoose.connection.db;
