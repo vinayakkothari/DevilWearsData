@@ -1,0 +1,40 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Scraped Titles</title>
+</head>
+<body>
+    <h1>Web Scraped Titles</h1>
+    <ul>
+        {% for url, title in titles.items() %}
+        <li><a href="{{ url }}" target="_blank">{{ title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Articles from Vogue & Refinery29</title>
+</head>
+<body>
+    <h1>Top 3 Articles from Vogue</h1>
+    <ul>
+        {% for title, link in vogue_articles %}
+        <li><a href="{{ link }}" target="_blank">{{ title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h1>Top 3 Articles from Refinery29</h1>
+    <ul>
+        {% for title, link in refinery29_articles %}
+        <li><a href="{{ link }}" target="_blank">{{ title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
