@@ -1,25 +1,41 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Button } from "../components/ui/Button"
-import { Input } from "../components/ui/Input"
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/Input';
 
 export default function LogIn() {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
-    })
+    });
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target
-        setFormData(prev => ({ ...prev, [name]: value }))
-    }
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        // Handle login logic here, e.g., call an API to authenticate the user
-        console.log('Login submitted:', formData)
-        // Redirect to dashboard or show error message based on login response
-    }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                // Handle successful login (e.g., store token, redirect)
+                console.log('Login successful:', data);
+            } else {
+                throw new Error(data.message);
+            }
+        } catch (error) {
+            console.error('Login failed:', error);
+            alert('Something went wrong, please try again');
+        }
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">
@@ -70,5 +86,5 @@ export default function LogIn() {
                 </motion.p>
             </motion.div>
         </div>
-    )
+    );
 }
