@@ -19,7 +19,7 @@ export async function uploadToS3(fileBuffer, fileName, fileType) {
       Key: fileName,
       Body: fileBuffer,
       ContentType: fileType,
-      ACL: "public-read",
+      //ACL: "public-read",
     }));
     return `https://${myAWSBucket}.s3.amazonaws.com/${fileName}`;
   } catch (err) {
