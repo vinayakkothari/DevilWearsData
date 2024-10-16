@@ -9,7 +9,7 @@ const DisplayWardrobe = () => {
     useEffect(() => {
         const fetchClothingItems = async () => {
             try {
-                const response = await fetch('/clothing');  // Fetching from clothing API
+                const response = await fetch('http://localhost:3000/api/images/upload');  // Fetching from clothing API
                 const data = await response.json();
                 setImages(data); 
                 setCategories([...new Set(data.map(item => item.category))]);  // Extract unique categories
