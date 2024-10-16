@@ -52,10 +52,6 @@ export default function VerticalNavbar() {
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-center mb-8">
-            <Avatar className="h-12 w-12">
-              <AvatarImage src="/placeholder.svg?height=48&width=48" alt="Devil Wears Data Logo" />
-              <AvatarFallback>DWD</AvatarFallback>
-            </Avatar>
             <span className="ml-2 text-xl font-bold">Devil Wears Data</span>
           </div>
 
