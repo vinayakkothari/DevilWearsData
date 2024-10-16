@@ -73,14 +73,13 @@ export default function SignUp() {
     };
 
     return (
-        /*<div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">*/
-        <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: {Back}, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-
+        <div className="min-h-screen flex items-center justify-center bg-black relative">
+            <img src={Back} alt="Background" className="absolute inset-0 w-full h-full object-cover opacity-50" />
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md"
+                className="bg-white p-8 rounded-lg shadow-xl w-full max-w-md relative z-10"
             >
                 <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
                     Join Devil Wears Data

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
+import Devil from "../assets/698454.jpg"
 
 export default function LogIn() {
     const [formData, setFormData] = useState({
@@ -39,6 +40,8 @@ export default function LogIn() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">
+            <img src={Devil} alt="Background" className="absolute inset-0 w-full h-full object-cover opacity-50" />
+
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
