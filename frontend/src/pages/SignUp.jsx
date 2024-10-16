@@ -3,10 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "../components/ui/Button"
 import { Input } from "../components/ui/Input"
 
+// const aestheticOptions = [
+//   'Minimalist', 'Bohemian', 'Vintage', 'Streetwear', 
+//   'Preppy', 'Romantic', 'Edgy', 'Classic'
+// ]
+
 const aestheticOptions = [
-  'Minimalist', 'Bohemian', 'Vintage', 'Streetwear', 
-  'Preppy', 'Romantic', 'Edgy', 'Classic'
-]
+       'Casual', 'Ethnic', 'Sports', 'Formal', 
+       'Party', 'Smart Casual'
+     ]
 
 export default function SignUp() {
     const [step, setStep] = useState(1)
@@ -43,7 +48,9 @@ export default function SignUp() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">
+        /*<div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">*/
+        <div className="min-h-screen flex items-center justify-center" style={{ backgroundImage: "Closet_beige.jpeg", backgroundSize: 'cover', backgroundPosition: 'center' }}>
+
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -101,7 +108,7 @@ export default function SignUp() {
                                 <h2 className="text-xl font-semibold mb-4 text-gray-700">
                                     Select Your Aesthetic Preferences
                                 </h2>
-                                <div className="grid grid-cols-2 gap-4 mb-6">
+                                {<div className="grid grid-cols-2 gap-3 mb-6">
                                     {aestheticOptions.map((aesthetic) => (
                                         <Button
                                             key={aesthetic}
@@ -113,7 +120,9 @@ export default function SignUp() {
                                             {aesthetic}
                                         </Button>
                                     ))}
-                                </div>
+                                </div> }
+                                
+
                             </motion.div>
                         )}
                     </AnimatePresence>

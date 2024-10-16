@@ -39,7 +39,8 @@ function Hero() {
             </div>
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-            <h1 className="text-white text-4xl md:text-7xl">
+            {/* <h1 className="text-white text-4xl md:text-7xl"> */}
+            <h1 className="text-white text-4xl md:text-7xl" style={{ fontFamily: 'Pistilli Roman' }}>
               Devil Wears Data
             </h1>
             <motion.p
