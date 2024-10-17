@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, Award } from 'lucide-react'; // Adding icons for better design
+import { CheckCircle, Award } from 'lucide-react'; // Icons for better design
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Button } from '../components/ui/Button.jsx';
-import { Link } from "react-router-dom";
 import VerticalNavbar from '../components/NavBar'; // Importing the navbar
+import BackGround from "../assets/Dashboard_bg1.jpg";
 
 const challengesData = [
     { id: 1, title: 'Complete 5 Swipes', points: 50, description: 'Swipe through 5 fashion items to complete this challenge!' },
@@ -24,13 +24,20 @@ export default function Challenges() {
 
     const completeChallenge = (challengeId) => {
         if (!completedChallenges.includes(challengeId)) {
-            setCompletedChallenges([...completedChallenges, challengeId]);
+            setCompletedChallenges(prevChallenges => [...prevChallenges, challengeId]);
             // Logic to add points goes here
         }
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-r from-blue-50 to-purple-50 p-8 flex">
+        <div
+            className="flex min-h-screen"
+            style={{
+                backgroundImage: `url(${BackGround})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
+        >
             {/* Vertical Navbar */}
             <VerticalNavbar isExpanded={isNavbarExpanded} onToggle={handleNavbarToggle} />
 
@@ -99,3 +106,4 @@ export default function Challenges() {
         </div>
     );
 }
+
