@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Card, CardHeader, CardTitle, CardContent } from '../components/ui/card';
 import { Link } from "react-router-dom";
 import VerticalNavbar from '../components/NavBar';  // Import Vertical Navbar
+import BackGround from "../assets/Dashboard_bg1.jpg";
 
 const MoodBoard = () => {
     const [isNavbarExpanded, setIsNavbarExpanded] = useState(false); // State to manage navbar
@@ -35,7 +36,15 @@ const MoodBoard = () => {
     ];
 
     return (
-        <div className="bg-gray-100 min-h-screen flex">
+        <div
+            className="flex min-h-screen"
+            style={{
+            backgroundImage: `url(${BackGround})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            }}
+        >
+         {/* <div className="bg-gray-100 min-h-screen flex"> */}
             {/* Vertical Navbar */}
             <VerticalNavbar isExpanded={isNavbarExpanded} onToggle={handleNavbarToggle} />
 
