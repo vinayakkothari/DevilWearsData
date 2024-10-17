@@ -1,22 +1,33 @@
-router.get('/messages', (req, res) => {
-    console.log("Fetching messages..."); // Log when the endpoint is hit
-    res.status(200).json(messages);
+import express from 'express';
+import ChatMessage from '../models/ChatMessage.js';
+
+const router = express.Router();
+
+// Route to get all chat messages
+router.get('/messages', async (req, res) => {
+    try {
+        const messages = await ChatMessage.find().sort({ timestamp: 1 });
+        res.status(200).json(messages);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching messages' });
+    }
 });
 
-router.post('/messages', (req, res) => {
+// Route to send a new chat message
+router.post('/messages', async (req, res) => {
     const { sender, content } = req.body;
-    console.log("Message received:", sender, content); // Log the received data
+
     if (!sender || !content) {
         return res.status(400).json({ message: 'Sender and content are required' });
     }
 
-    const newMessage = {
-        id: messages.length + 1,
-        sender,
-        content,
-        timestamp: new Date().toISOString(),
-    };
-
-    messages.push(newMessage);
-    res.status(201).json({ message: 'Message sent!', data: newMessage });
+    try {
+        const newMessage = new ChatMessage({ sender, content });
+        await newMessage.save();
+        res.status(201).json(newMessage);
+    } catch (error) {
+        res.status(500).json({ message: 'Error sending message' });
+    }
 });
+
+export default router;

@@ -18,11 +18,9 @@ import {
 
 const navItems = [
   { name: 'Home', icon: Home, href: '/' },
-  { name: 'Explore', icon: Search, href: '/explore' },
-  { name: 'Community', icon: Users, href: '/community' }, // Community link added here
-  { name: 'Trends', icon: TrendingUp, href: '/trends' },
+  { name: 'Community', icon: Users, href: '/community' },
   { name: 'Challenges', icon: Award, href: '/challenges' },
-  { name: 'Mood Boards', icon: Image, href: '/moodboards' },
+  { name: 'MoodBoards', icon: Image, href: '/moodboards' },
   { name: 'Settings', icon: Settings, href: '/settings' },
 ];
 

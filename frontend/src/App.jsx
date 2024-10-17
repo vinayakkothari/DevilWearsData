@@ -8,11 +8,17 @@ import Dashboard from './pages/Dashboard.jsx';
 import FashionSwiper from "./components/Swipper.jsx";
 import Community from "./pages/Community.jsx";
 import Messages from "./components/Chat.jsx";
+import Challenges from "./pages/Challenges.jsx";
+import MoodBoard from "./pages/MoodBoard.jsx";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/profile" element={<Profile/>}></Route>
+        <Route path="/moodboards" element={<MoodBoard/>}></Route>
+        <Route path="/challenges" element={<Challenges/>}></Route>
         <Route path="/" element={<MainPage/>}></Route>
         <Route path="/login" element={<LogIn/>}></Route>
         <Route path="/signup" element={<SignUp/>}></Route>
