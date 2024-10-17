@@ -51,11 +51,11 @@ export async function fetchImagesWithUrls(images) {
   const [myAWSBucket, s3Client] = setup();
 
   // Generate pre-signed URLs for each image
-  const imagesWithUrls = await Promise.all(images.map(async (image) => {
-    const key = image.imageUrl.split('/').pop(); // Extract the file name from the URL
+  const imagesWithUrls = await Promise.all(images.map(async (img) => {
+    const key = img.image ? img.image.split('/').pop() : ''; // Extract the file name from the URL
     const preSignedUrl = await getSignedUrlForS3Object(key); // Generate pre-signed URL
     return {
-      ...image,
+      ...img,
       preSignedUrl, // Add pre-signed URL to the image object
     };
   }));
