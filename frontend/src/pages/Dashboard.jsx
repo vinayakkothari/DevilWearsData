@@ -9,7 +9,7 @@ import 'intro.js/introjs.css';
 import { Button } from "../components/ui/Button.jsx";
 import { Player } from '@lottiefiles/react-lottie-player'; // Import Lottie Player
 
-// Import Lottie animations (you can download them from LottieFiles)
+// Import Lottie animations
 import sunnyAnimation from '../assets/animations/sunny.json';
 import cloudyAnimation from '../assets/animations/cloudy.json';
 import rainAnimation from '../assets/animations/rainy.json';
@@ -58,7 +58,6 @@ export default function Dashboard() {
     }, []);
 
     // Function to render appropriate weather animation based on weather type
-    // Function to render appropriate weather animation based on weather type
     const renderWeatherAnimation = () => {
         return (
             <div className="flex justify-center items-center">
@@ -74,20 +73,49 @@ export default function Dashboard() {
                                     ? rainAnimation
                                     : sunnyAnimation
                     }
-                    className="weather-animation"
+                    className="weather-animation" // Apply sizing here
+                    style={{ width: '150px', height: '150px' }} // Set specific size
                 />
             </div>
         );
     };
 
+    // Function to render the podium for the leaderboard
+    const renderLeaderboardPodium = () => {
+        return (
+            <div className="flex justify-around items-end">
+                {/* Second Place */}
+                <div className="bg-gray-400 rounded-t-lg flex flex-col items-center justify-end h-12 w-20">
+                    <span role="img" aria-label="second-place" className="text-3xl">🥈</span>
+                    <p className="text-center text-sm font-bold mt-2">{leaderboard[1].user}</p>
+                    <p className="text-center text-xs">{leaderboard[1].points} pts</p>
+                </div>
+
+
+                {/* First Place */}
+                <div className="bg-yellow-400 rounded-t-lg flex flex-col items-center justify-end h-30 w-20">
+                    <span role="img" aria-label="first-place" className="text-3xl">🥇</span>
+                    <p className="text-center text-sm font-bold mt-2">{leaderboard[0].user}</p>
+                    <p className="text-center text-xs">{leaderboard[0].points} pts</p>
+                </div>
+
+                {/* Third Place */}
+                <div className="bg-orange-500 rounded-t-lg flex flex-col items-center justify-end h-10 w-20">
+                    <span role="img" aria-label="third-place" className="text-3xl">🥉</span>
+                    <p className="text-center text-sm font-bold mt-2">{leaderboard[2].user}</p>
+                    <p className="text-center text-xs">{leaderboard[2].points} pts</p>
+                </div>
+            </div>
+        );
+    };
 
     return (
         <div className="bg-gray-100 min-h-screen flex">
             {/* Vertical Navbar */}
-            <VerticalNavbar isExpanded={isNavbarExpanded} onToggle={handleNavbarToggle} />
+            <VerticalNavbar isExpanded={isNavbarExpanded} onToggle={handleNavbarToggle}/>
             <div
                 className={`flex-grow p-8 transition-all duration-300 ease-in-out ${isNavbarExpanded ? '-ml-64' : 'ml-16'}`}
-                style={{ marginLeft: isNavbarExpanded ? '16rem' : '14rem' }} // Ensure spacing from the navbar
+                style={{marginLeft: isNavbarExpanded ? '16rem' : '14rem' }} // Ensure spacing from the navbar
             >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -96,17 +124,22 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
-                        className="bg-matte-blue rounded-xl shadow-md p-4"
+                        className="bg-matte-blue rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
                         data-intro="Click to Swipe."
                     >
-                        <Card className="p-5">
+                        <Card className="p-5 h-full">
                             <CardHeader className="flex items-center">
                                 <HandIcon className="w-6 h-6 mr-2" />
                                 <CardTitle>Swipe through!</CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                <Button variant="secondary" size="sm" onClick={() => navigate('/swipe')}>
-                                    Swipe
+                            <CardContent className="flex justify-center items-center">
+                                <Button
+                                    variant="primary"
+                                    size="lg"
+                                    className="mt-8 py-3 px-6 text-lg font-semibold rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                                    onClick={() => navigate('/swipe')}
+                                >
+                                    Start Swiping
                                 </Button>
                             </CardContent>
                         </Card>
@@ -117,18 +150,18 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
-                        className="bg-matte-red rounded-xl shadow-md p-4"
+                        className="bg-matte-red rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
                         data-intro="This card shows today's weather in your city."
                     >
-                        <Card className="p-5 relative">
+                        <Card className="p-5 h-full">
                             <CardHeader className="flex items-center">
                                 <Sun className="w-6 h-6 mr-2" />
                                 <CardTitle>Today's Weather</CardTitle>
                             </CardHeader>
-                            <CardContent className="relative h-64">
+                            <CardContent className="relative">
                                 {weather.temperature !== null && weather.weather !== null ? (
                                     <>
-                                        <div className="absolute inset-0 opacity-40 z-0">
+                                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-0">
                                             {renderWeatherAnimation()}
                                         </div>
                                         <div className="relative z-10">
@@ -150,20 +183,16 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
-                        className="bg-matte-green rounded-xl shadow-md p-4"
+                        className="bg-matte-green rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
                         data-intro="Check the leaderboard here."
                     >
-                        <Card className="p-5">
+                        <Card className="p-5 h-full">
                             <CardHeader className="flex items-center">
                                 <TrendingUp className="w-6 h-6 mr-2" />
                                 <CardTitle>Leaderboard</CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                {leaderboard.map((entry, index) => (
-                                    <p key={index}>
-                                        {index + 1}. {entry.user} - {entry.points} points
-                                    </p>
-                                ))}
+                            <CardContent className="flex flex-col justify-center items-center overflow-hidden">
+                                {renderLeaderboardPodium()}
                             </CardContent>
                         </Card>
                     </motion.div>
@@ -173,10 +202,10 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
-                        className="bg-matte-blue rounded-xl shadow-md p-4"
+                        className="bg-matte-blue rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
                         data-intro="This card lists upcoming events."
                     >
-                        <Card className="p-5">
+                        <Card className="p-5 h-full">
                             <CardHeader className="flex items-center">
                                 <Calendar className="w-6 h-6 mr-2" />
                                 <CardTitle>Upcoming Events</CardTitle>
