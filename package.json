@@ -1,11 +1,6 @@
 {
   "dependencies": {
-<<<<<<< HEAD
-    "axios": "^1.7.7",
-    "ng-avatar-drag-drop": "^1.0.0"
-=======
     "@lottiefiles/react-lottie-player": "^3.5.4",
     "axios": "^1.7.7"
->>>>>>> dcbb04d1ef278db7b45a8ace3ab353e49a88d641
   }
 }
