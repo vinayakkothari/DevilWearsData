@@ -126,7 +126,6 @@ export async function handleImageUpload(req, res) {
 }
 export async function getAllImages(req, res) {
   try {
-    console.log("Inside getAllImages");
     const { userId } = req.query;
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -148,9 +147,6 @@ export async function getAllImages(req, res) {
     if (!Array.isArray(images) || images.length === 0) {
       return res.status(404).json({ message: "No images found" });
     }
-
-    // Inside getAllImages, after fetching images
-    console.log("Fetched images:", images);
 
     // Fetch pre-signed URLs using the S3 service
     const imagesWithUrls = await fetchImagesWithUrls(images);
