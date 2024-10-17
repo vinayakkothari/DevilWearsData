@@ -268,6 +268,24 @@ export default function Dashboard() {
               </CardContent>
             </Card>
           </motion.div>
+
+          <button
+                    onClick={startTutorial}
+                    className="fixed bottom-4 right-8 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 transition"
+                    data-intro="Click here to start the tour!"
+                >
+                    Start Tutorial
+                </button>
+
+                <a
+                    href="https://mirandadwd.streamlit.app/" // Replace with the external site URL
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="fixed bottom-4 left-70 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 transition"
+                    data-intro="Click here to get help from Miranda Priestly!"
+                >
+                    Get help from Miranda Priestly
+                </a>
         </div>
       </div>
     </div>
