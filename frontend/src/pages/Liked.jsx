@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
 import VerticalNavbar from '../components/NavBar'; // Importing the navbar
+import BackGround from "../assets/Dashboard_bg1.jpg";
+import Img1 from "../assets/Img1Liked.jpg";
+import Img2 from "../assets/Img2Liked.jpg";
+import Img3 from "../assets/Img3Liked.jpg";
+import Img4 from "../assets/Img4Liked.jpg";
+import Img5 from "../assets/Img5Liked.jpg";
+import Img6 from "../assets/Img6Liked.jpg";
+
+
 
 const LikedImagesPage = () => {
     // Sample liked images
     const likedImages = [
-        'https://via.placeholder.com/150/FF5733', // Replace with real image URLs
-        'https://via.placeholder.com/150/33CFFF',
-        'https://via.placeholder.com/150/FF33A8',
-        'https://via.placeholder.com/150/33FF57',
-        'https://via.placeholder.com/150/FFD133',
-        'https://via.placeholder.com/150/3358FF',
+        Img1, // Replace with real image URLs
+        Img2,
+        Img3,
+        Img4,
+        Img5,
+        Img6,
     ];
 
     return (
-        <div className="bg-gray-100 min-h-screen flex">
+        <div
+            className="flex min-h-screen"
+            style={{
+            backgroundImage: `url(${BackGround})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            }}
+        >
+        {/* <div className="bg-gray-100 min-h-screen flex"> */}
             {/* Left-side Navbar */}
             <VerticalNavbar />
 
