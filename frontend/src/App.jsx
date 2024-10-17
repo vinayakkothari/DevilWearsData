@@ -11,6 +11,8 @@ import Messages from "./components/Chat.jsx";
 import Challenges from "./pages/Challenges.jsx";
 import MoodBoard from "./pages/MoodBoard.jsx";
 import Profile from "./pages/Profile.jsx";
+import Liked from "./pages/Liked.jsx";
+
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route path='/swipe' element={<FashionSwiper/>}></Route>
         <Route path='/community' element={<Community/>}></Route>
         <Route path='/message' element={<Messages/>}></Route>
+        <Route path='/liked' element={<Liked/>}></Route>
+
       </Routes>
     </Router>
   );

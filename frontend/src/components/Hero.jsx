@@ -139,7 +139,7 @@ function Hero() {
         </div>
 
         {/* Latest Fashion Trends Section */}
-        <div className="bg-white border-black">
+        {/* <div className="bg-white border-black">
           <motion.div
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -168,7 +168,7 @@ function Hero() {
               </CardContent>
             </Card>
           </motion.div>
-        </div>
+        </div> */}
 
         {/* CTA Section */}
         <section className="py-20 bg-black text-primary-foreground">

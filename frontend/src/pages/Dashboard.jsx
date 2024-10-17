@@ -8,6 +8,8 @@ import introJs from 'intro.js';
 import 'intro.js/introjs.css';
 import { Button } from "../components/ui/Button.jsx";
 import { Player } from '@lottiefiles/react-lottie-player'; // Import Lottie Player
+import BackGround from "../assets/Dashboard_bg1.jpg";
+
 
 // Import Lottie animations
 import sunnyAnimation from '../assets/animations/sunny.json';
@@ -110,7 +112,15 @@ export default function Dashboard() {
     };
 
     return (
-        <div className="bg-gray-100 min-h-screen flex">
+        <div
+            className="flex min-h-screen"
+            style={{
+            backgroundImage: `url(${BackGround})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            }}
+        >
+        {/* <div className="bg-gray-100 min-h-screen flex">  */}
             {/* Vertical Navbar */}
             <VerticalNavbar isExpanded={isNavbarExpanded} onToggle={handleNavbarToggle}/>
             <div
@@ -124,7 +134,7 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
-                        className="bg-matte-blue rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
+                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
                         data-intro="Click to Swipe."
                     >
                         <Card className="p-5 h-full">
@@ -150,7 +160,7 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.4 }}
-                        className="bg-matte-red rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
+                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
                         data-intro="This card shows today's weather in your city."
                     >
                         <Card className="p-5 h-full">
@@ -183,7 +193,7 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.6 }}
-                        className="bg-matte-green rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
+                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
                         data-intro="Check the leaderboard here."
                     >
                         <Card className="p-5 h-full">
@@ -202,7 +212,7 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
-                        className="bg-matte-blue rounded-xl shadow-md p-4 h-72" // Ensuring box height is uniform
+                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
                         data-intro="This card lists upcoming events."
                     >
                         <Card className="p-5 h-full">
