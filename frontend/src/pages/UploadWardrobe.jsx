@@ -386,7 +386,48 @@ function UploadWardrobe() {
                 {/* Article options */}
                 <option value="">Select type of clothing</option>
                 <option value="shirt">Shirts</option>
-                {/* Add more article options */}
+                <option value="jeans">Jeans</option>
+                <option value="track pants">Track Pants</option>
+                <option value="tshirt">Tshirts</option>
+                <option value="tops">Tops</option>
+                <option value="sweatshirt">Sweatshirts</option>
+                <option value="kurta">Kurtas</option>
+                <option value="waistcoat">Waistcoat</option>
+                <option value="shorts">Shorts</option>
+                <option value="sarees">Sarees</option>
+                <option value="rain jacket">Rain Jacket</option>
+                <option value="dress">Dresses</option>
+                <option value="skirt">Skirts</option>
+                <option value="blazers">Blazers</option>
+                <option value="kurta sets">Kurta Sets</option>
+                <option value="shrug">Shrug</option>
+                <option value="trousers">Trousers</option>
+                <option value="dupatta">Dupatta</option>
+                <option value="capris">Capris</option>
+                <option value="tunics">Tunics</option>
+                <option value="jackets">Jackets</option>
+                <option value="sweaters">Sweaters</option>
+                <option value="tracksuits">Tracksuits</option>
+                <option value="swimwear">Swimwear</option>
+                <option value="leggings">Leggings</option>
+                <option value="kurtis">Kurtis</option>
+                <option value="jumpsuit">Jumpsuit</option>
+                <option value="suspenders">Suspenders</option>
+                <option value="salwar and dupatta">Salwar and Dupatta</option>
+                <option value="patiala">Patiala</option>
+                <option value="stockings">Stockings</option>
+                <option value="tights">Tights</option>
+                <option value="churidar">Churidar</option>
+                <option value="nehru jackets">Nehru Jackets</option>
+                <option value="salwar">Salwar</option>
+                <option value="jeggings">Jeggings</option>
+                <option value="rompers">Rompers</option>
+                <option value="booties">Booties</option>
+                <option value="lehenga choli">Lehenga Choli</option>
+                <option value="clothing set">Clothing Set</option>
+                <option value="belts">Belts</option>
+                <option value="rain trousers">Rain Trousers</option>
+                <option value="suits">Suits</option>
               </select>
             </div>
 
@@ -399,10 +440,19 @@ function UploadWardrobe() {
                 className="border border-gray-300 p-2 rounded w-full"
                 required
               >
-                <option value="">Select colour</option>
-                <option value="blue">Blue</option>
-                <option value="black">Black</option>
-                {/* Add more color options */}
+               <option value="">Select colour</option>
+               <option value="blue">Blue</option>
+               <option value="black">Black</option>
+               <option value="grey">Grey</option>
+               <option value="green">Green</option>
+               <option value="purple">Purple</option>
+               <option value="white">White</option>
+               <option value="brown">Brown</option>
+               <option value="pink">Pink</option>
+               <option value="red">Red</option>
+               <option value="yellow">Yellow</option>
+               <option value="orange">Orange</option>
+               <option value="unknown">Unknown</option>
               </select>
             </div>
 
@@ -414,10 +464,11 @@ function UploadWardrobe() {
                 className="border border-gray-300 p-2 rounded w-full"
                 required
               >
-                <option value="">Select Season</option>
-                <option value="spring">Spring</option>
-                <option value="summer">Summer</option>
-                {/* Add more season options */}
+              <option value="">Select Season</option>
+              <option value="spring">Spring</option>
+              <option value="summer">Summer</option>
+              <option value="fall">Fall</option>
+              <option value="winter">Winter</option>
               </select>
             </div>
 
@@ -429,10 +480,14 @@ function UploadWardrobe() {
                 className="border border-gray-300 p-2 rounded w-full"
                 required
               >
-                <option value="">Select Usage</option>
-                <option value="casual">Casual</option>
-                <option value="formal">Formal</option>
-                {/* Add more usage options */}
+               <option value="">Select Usage</option>
+               <option value="casual">Casual</option>
+               <option value="formal">Formal</option>
+               <option value="sports">Sports</option>
+               <option value="party">Party</option>
+               <option value="ethnic">Ethnic</option>
+               <option value="smartcas">Smart Casual</option>
+
               </select>
             </div>
 
