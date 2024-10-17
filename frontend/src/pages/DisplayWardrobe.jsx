@@ -10,29 +10,38 @@ const DisplayWardrobe = () => {
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {
-      setUserId(storedUserId); // Set the userId state with the value from localStorage
+      setUserId(storedUserId);
     } else {
       console.log("No userId found in localStorage.");
     }
   }, []);
-  
 
   useEffect(() => {
     const fetchClothingItems = async () => {
+      if (!userId) return; // Don't fetch if userId is not set
+      
       try {
-        const response = await fetch(`http://localhost:3000/api/images?userId=${userId}`); // Pass userId as a query parameter
+        const response = await fetch(`http://localhost:3000/api/images?userId=${userId}`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
+        
+        // Ensure the fetched data is an array
+        if (!Array.isArray(data)) {
+          throw new Error('Fetched data is not an array');
+        }
+
         setImages(data);
         setCategories([...new Set(data.map((item) => item.category))]);
       } catch (error) {
         console.error("Error fetching clothing items:", error);
       }
     };
-  
-    if (userId) {
-      fetchClothingItems();
-      console.log("Fetching clothing items for user:", userId);
-    }
+
+    fetchClothingItems();
+    console.log("Fetching clothing items for user:", userId);
   }, [userId]);
 
   const handleDragStart = (event, image) => {
@@ -45,7 +54,7 @@ const DisplayWardrobe = () => {
     const canvasRect = event.target.getBoundingClientRect();
     const x = event.clientX - canvasRect.left;
     const y = event.clientY - canvasRect.top;
-    
+
     setCanvasItems((prevItems) => [...prevItems, { ...image, x, y }]);
   };
 
@@ -73,10 +82,8 @@ const DisplayWardrobe = () => {
       </div>
 
       <div className="image-gallery flex">
-        {images
-          .filter(
-            (image) => !selectedCategory || image.category === selectedCategory
-          )
+        {Array.isArray(images) && images
+          .filter((image) => !selectedCategory || image.category === selectedCategory)
           .map((image) => (
             <img
               key={image._id}

@@ -127,27 +127,28 @@ export async function handleImageUpload(req, res) {
 
 export async function getAllImages(req, res) {
   try {
-    const { userId } = req.query; // Get userId from query parameter
+      const { userId } = req.query; // Get userId from query parameter
 
-    if (!userId) {
-      return res.status(400).json({ message: "User ID is required" });
-    }
+      if (!userId) {
+          return res.status(400).json({ message: "User ID is required" });
+      }
 
-    const db = mongoose.connection.db;
-    const collection = db.collection('clothings');
+      const db = mongoose.connection.db;
+      const collection = db.collection('clothings');
 
-    // Fetch all images for the specific user
-    const images = await collection.find({ userId }).toArray(); // Match userId
+      // Fetch all images for the specific user
+      const images = await collection.find({ userId }).toArray(); // Match userId
 
-    // Fetch pre-signed URLs using the S3 service
-    const imagesWithUrls = await fetchImagesWithUrls(images);
-    console.log("Got all images for user:", userId);
-    
-    return res.status(200).json(imagesWithUrls); 
-    
+      // Fetch pre-signed URLs using the S3 service
+      const imagesWithUrls = await fetchImagesWithUrls(images);
+      console.log("Got all images for user:", userId);
+      
+      return res.status(200).json(imagesWithUrls); 
+      
   } catch (error) {
-    console.error('Error in getAllImages:', error);
-    return res.status(500).json({ message: error.message });
+      console.error('Error in getAllImages:', error);
+      return res.status(500).json({ message: error.message });
   }
 }
+
 
