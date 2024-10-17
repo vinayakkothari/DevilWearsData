@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { motion, useAnimation } from 'framer-motion'
 import { Card, CardContent } from "./ui/card"
+import sunImage from '../assets/sun.png'
+import leatherImage from '../assets/leather.png'
+import slimImage from '../assets/slim.png'
+import floralImage from '../assets/floral.png'
+import shoeImage from '../assets/shoe.png'
 
 const fetchFashionItems = async () => {
-    // This would typically be an API call. For this example, we'll return mock data.
     return [
-        { id: '1', image: '/placeholder.svg?height=400&width=300', name: 'Summer Dress', category: 'Dresses' },
-        { id: '2', image: '/placeholder.svg?height=400&width=300', name: 'Leather Jacket', category: 'Outerwear' },
-        { id: '3', image: '/placeholder.svg?height=400&width=300', name: 'Slim Fit Jeans', category: 'Pants' },
-        { id: '4', image: '/placeholder.svg?height=400&width=300', name: 'Floral Blouse', category: 'Tops' },
-        { id: '5', image: '/placeholder.svg?height=400&width=300', name: 'Sneakers', category: 'Shoes' },
+        { id: '1', image: sunImage, name: 'Summer Dress', category: 'Dresses' },
+        { id: '2', image: leatherImage, name: 'Leather Jacket', category: 'Outerwear' },
+        { id: '3', image: slimImage, name: 'Slim Fit Jeans', category: 'Pants' },
+        { id: '4', image: floralImage, name: 'Floral Blouse', category: 'Tops' },
+        { id: '5', image: shoeImage, name: 'Sneakers', category: 'Shoes' },
     ]
 }
 
@@ -27,15 +31,6 @@ export default function FashionSwiper() {
         fetchFashionItems().then(setItems)
     }, [])
 
-    useEffect(() => {
-        if (swipeCount > 0 && swipeCount % 10 === 0) {
-            console.log('Preferences after 10 swipes:', {
-                likes: likes.slice(-10),
-                dislikes: dislikes.slice(-10)
-            })
-        }
-    }, [swipeCount, likes, dislikes])
-
     const handleSwipe = (direction) => {
         const currentItem = items[currentIndex]
         if (direction === 'right') {
@@ -44,8 +39,14 @@ export default function FashionSwiper() {
             setDislikes([...dislikes, currentItem.id])
         }
         setSwipeCount(swipeCount + 1)
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length)
+        if (currentIndex < items.length - 1) {
+            setCurrentIndex((prevIndex) => prevIndex + 1)
+        } else {
+            console.log('Swipe session complete. Showing preferences...')
+            // Optional: Display results or handle end of swipes
+        }
         setSwipeDirection(null)
+        controls.start({ x: 0, opacity: 1, rotate: 0 }) // Reset animation after each swipe
     }
 
     const handleDrag = (event, info) => {
@@ -59,13 +60,11 @@ export default function FashionSwiper() {
     }
 
     const handleDragEnd = (event, info) => {
-        const threshold = 100 // Increased threshold for more deliberate swipes
+        const threshold = 100
         if (info.offset.x > threshold) {
-            controls.start({ x: '100%', opacity: 0, rotate: 10 })
-            handleSwipe('right')
+            controls.start({ x: '100%', opacity: 0, rotate: 10 }).then(() => handleSwipe('right'))
         } else if (info.offset.x < -threshold) {
-            controls.start({ x: '-100%', opacity: 0, rotate: -10 })
-            handleSwipe('left')
+            controls.start({ x: '-100%', opacity: 0, rotate: -10 }).then(() => handleSwipe('left'))
         } else {
             controls.start({ x: 0, opacity: 1, rotate: 0 })
             setSwipeDirection(null)
@@ -103,14 +102,14 @@ export default function FashionSwiper() {
                         </div>
                     </CardContent>
                 </motion.div>
-                <motion.div 
+                <motion.div
                     className="absolute top-4 left-4 bg-green-500 rounded-full p-2 text-white font-bold"
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: swipeDirection === 'right' ? 1 : 0, scale: swipeDirection === 'right' ? 1 : 0 }}
                 >
                     LIKE
                 </motion.div>
-                <motion.div 
+                <motion.div
                     className="absolute top-4 right-4 bg-red-500 rounded-full p-2 text-white font-bold"
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: swipeDirection === 'left' ? 1 : 0, scale: swipeDirection === 'left' ? 1 : 0 }}
@@ -119,7 +118,11 @@ export default function FashionSwiper() {
                 </motion.div>
             </Card>
             <p className="mt-4 text-white">Swipe Count: {swipeCount}</p>
-            <p className="mt-2 text-white text-sm">Swipe right to like, left to dislike</p>
+            {swipeCount < 5 ? (
+                <p className="mt-2 text-white text-sm">Swipe right to like, left to dislike</p>
+            ) : (
+                <p className="mt-2 text-white text-sm">You've swiped through all the items!</p>
+            )}
         </div>
     )
 }
