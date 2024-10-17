@@ -20,9 +20,9 @@ import {
 
 const navItems = [
   { name: 'Home', icon: Home, href: '/dashboard' },
-  //{ name: 'Liked', icon: Heart, href: '/liked' },    
+  { name: 'Liked', icon: Heart, href: '/liked' },    
   { name: 'Upload Item', icon: Camera, href: '/upload'} ,      
-  //{ name: 'Virtual Wardrobe', icon: Briefcase, href: '/wardrobe' },
+  { name: 'Virtual Wardrobe', icon: Briefcase, href: '/wardrobe' },
   { name: 'Community', icon: Users, href: '/community' },
   { name: 'Challenges', icon: Award, href: '/challenges' },
   { name: 'MoodBoards', icon: Image, href: '/moodboards' },
