@@ -5,3 +5,30 @@
   padding: 2rem;
   text-align: center;
 }
+
+/* Add to your main CSS file */
+.weather-container {
+  background: linear-gradient(to bottom, #4facfe, #00f2fe);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: justify;
+}
+
+h2 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.weather-animation {
+  width: 50px;  /* Adjust the width to your desired size */
+  height: 50px; /* Adjust the height accordingly */
+}

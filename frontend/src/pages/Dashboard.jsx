@@ -7,6 +7,12 @@ import VerticalNavbar from '../components/NavBar';
 import introJs from 'intro.js';
 import 'intro.js/introjs.css';
 import { Button } from "../components/ui/Button.jsx";
+import { Player } from '@lottiefiles/react-lottie-player'; // Import Lottie Player
+
+// Import Lottie animations (you can download them from LottieFiles)
+import sunnyAnimation from '../assets/animations/sunny.json';
+import cloudyAnimation from '../assets/animations/cloudy.json';
+import rainAnimation from '../assets/animations/rainy.json';
 
 // Function to fetch weather data
 const fetchWeather = async () => {
@@ -18,7 +24,7 @@ const fetchWeather = async () => {
     const data = await response.json();
     return {
         temperature: data.main.temp,
-        weather: data.weather[0].description
+        weather: data.weather[0].main.toLowerCase() // 'Clear', 'Clouds', 'Rain', etc.
     };
 };
 
@@ -51,21 +57,29 @@ export default function Dashboard() {
         loadWeather();
     }, []);
 
-    // Function to add points for the current user (simulated in this case)
-    const addPoints = (earnedPoints) => {
-        const updatedPoints = points + earnedPoints;
-        setPoints(updatedPoints);
-
-        // Optionally, update the leaderboard with the new points
-        const updatedLeaderboard = leaderboard.map((entry, index) => {
-            if (index === 0) {
-                return { ...entry, points: entry.points + earnedPoints };
-            }
-            return entry;
-        });
-
-        setLeaderboard(updatedLeaderboard);
+    // Function to render appropriate weather animation based on weather type
+    // Function to render appropriate weather animation based on weather type
+    const renderWeatherAnimation = () => {
+        return (
+            <div className="flex justify-center items-center">
+                <Player
+                    autoplay
+                    loop
+                    src={
+                        weather.weather === 'clear'
+                            ? sunnyAnimation
+                            : weather.weather === 'clouds'
+                                ? cloudyAnimation
+                                : weather.weather === 'rain'
+                                    ? rainAnimation
+                                    : sunnyAnimation
+                    }
+                    className="weather-animation"
+                />
+            </div>
+        );
     };
+
 
     return (
         <div className="bg-gray-100 min-h-screen flex">
@@ -106,16 +120,23 @@ export default function Dashboard() {
                         className="bg-matte-red rounded-xl shadow-md p-4"
                         data-intro="This card shows today's weather in your city."
                     >
-                        <Card className="p-5">
+                        <Card className="p-5 relative">
                             <CardHeader className="flex items-center">
                                 <Sun className="w-6 h-6 mr-2" />
                                 <CardTitle>Today's Weather</CardTitle>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="relative h-64">
                                 {weather.temperature !== null && weather.weather !== null ? (
                                     <>
-                                        <p>{weather.weather} in Manipal</p>
-                                        <p>Temperature: {weather.temperature}°C</p>
+                                        <div className="absolute inset-0 opacity-40 z-0">
+                                            {renderWeatherAnimation()}
+                                        </div>
+                                        <div className="relative z-10">
+                                            <p className="text-center text-lg mt-4">
+                                                {weather.weather.charAt(0).toUpperCase() + weather.weather.slice(1)} in Manipal
+                                            </p>
+                                            <p className="text-center text-sm">Temperature: {weather.temperature}°C</p>
+                                        </div>
                                     </>
                                 ) : (
                                     <p>Loading weather...</p>
