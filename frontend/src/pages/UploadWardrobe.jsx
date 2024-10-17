@@ -12,7 +12,7 @@ function UploadWardrobe() {
   const [season, setSeason] = useState('');
   const [usage, setUsage] = useState('');
   const [tags, setTags] = useState('');
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('yourUserIdHere');
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -239,3 +239,4 @@ function UploadWardrobe() {
 }
 
 export default UploadWardrobe;
+
