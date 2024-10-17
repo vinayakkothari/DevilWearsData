@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from "./ui/Button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
+  UserRoundPen,
   Home,
   Search,
   Users,
@@ -16,9 +17,11 @@ import {
   Heart,    
   Briefcase,
   Camera,
+  LogOut,
 } from 'lucide-react';
 
 const navItems = [
+  { name: 'Profile', icon: UserRoundPen, href: '/profile'},
   { name: 'Home', icon: Home, href: '/dashboard' },
   { name: 'Liked', icon: Heart, href: '/liked' },    
   { name: 'Upload Item', icon: Camera, href: '/upload'} ,      
@@ -26,6 +29,7 @@ const navItems = [
   { name: 'Community', icon: Users, href: '/community' },
   { name: 'Challenges', icon: Award, href: '/challenges' },
   { name: 'MoodBoards', icon: Image, href: '/moodboards' },
+  { name: 'Log Out', icon: LogOut, href: '/'},
 ];
 
 export default function VerticalNavbar() {
@@ -68,9 +72,9 @@ export default function VerticalNavbar() {
                     </Link>
                   </li>
               ))}
-            </ul>
+            </ul> 
 
-            <div className="mt-auto">
+            {/* <div className="mt-auto">
               <Link to="/profile">
                 <Button variant="ghost" className="w-full justify-start">
                   <Avatar className="h-6 w-6 mr-2">
@@ -80,7 +84,7 @@ export default function VerticalNavbar() {
                   Profile
                 </Button>
               </Link>
-            </div>
+            </div> */}
           </div>
         </motion.nav>
       </>
