@@ -1,14 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import video1 from "../assets/video1.mp4";
 import logo from "../assets/dwd_dark.png";
+import backgroundMusic from "../assets/music.mp3"; // Your music file
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card.jsx";
 import { Button } from "./ui/Button.jsx";
 import { Input } from "./ui/Input.jsx";
 import { Shirt, User, Crown, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+import React, { useRef, useEffect } from "react";
 
 function Hero() {
   const navigate = useNavigate();
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    audioRef.current.play();
+  }, []);
+
+  const toggleMusic = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+    } else {
+      audioRef.current.pause();
+    }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -30,17 +45,27 @@ function Hero() {
               <img className="h-16 w-auto ml-5 md:h-20" src={logo} alt="Logo" />
             </button>
             <div className="flex space-x-2 mx-4 md:space-x-5">
-              <Button variant="secondary" size="sm" onClick={() => navigate('/login')}>
+              <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => navigate("/login")}
+              >
                 Log In
               </Button>
-              <Button variant="secondary" size="sm" onClick={() => navigate('/signup')}>
+              <Button
+                  variant="secondary"
+                  size="sm"
+                  onClick={() => navigate("/signup")}
+              >
                 Sign Up
               </Button>
             </div>
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-            {/* <h1 className="text-white text-4xl md:text-7xl"> */}
-            <h1 className="text-white text-4xl md:text-7xl" style={{ fontFamily: 'Pistilli Roman' }}>
+            <h1
+                className="text-white text-4xl md:text-7xl"
+                style={{ fontFamily: "Pistilli Roman" }}
+            >
               Devil Wears Data
             </h1>
             <motion.p
@@ -52,14 +77,27 @@ function Hero() {
               Your wardrobe at your fingertips
             </motion.p>
             <motion.button>
-              <Button variant="ghost" size="sm" className="m-5" onClick={() => navigate('/signup')}>
+              <Button
+                  variant="ghost"
+                  size="sm"
+                  className="m-5"
+                  onClick={() => navigate("/signup")}
+              >
                 Get Started
               </Button>
             </motion.button>
           </div>
         </div>
 
-        {/* Rest of your component code stays unchanged */}
+        {/* Background Music */}
+        <div className="fixed bottom-5 right-5">
+          <audio ref={audioRef} loop>
+            <source src={backgroundMusic} type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+          <Button onClick={toggleMusic}>Play/Pause Music</Button>
+        </div>
+
         {/* Key Features Section */}
         <div className="bg-white">
           <section className="py-10 md:py-20">
@@ -137,38 +175,6 @@ function Hero() {
             </div>
           </section>
         </div>
-
-        {/* Latest Fashion Trends Section */}
-        {/* <div className="bg-white border-black">
-          <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <Card className="mb-8 max-w-md mx-auto p-3">
-              <CardHeader>
-                <CardTitle>Latest Fashion Trends</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  <li className="flex items-center">
-                    <TrendingUp className="mr-2 h-4 w-4 text-green-500" />
-                    <span>Oversized blazers are making a comeback</span>
-                  </li>
-                  <li className="flex items-center">
-                    <TrendingUp className="mr-2 h-4 w-4 text-green-500" />
-                    <span>Pastel colors are dominating spring collections</span>
-                  </li>
-                  <li className="flex items-center">
-                    <TrendingUp className="mr-2 h-4 w-4 text-green-500" />
-                    <span>Sustainable fashion is on the rise</span>
-                  </li>
-                </ul>
-                <Button className="mt-4">View All Trends</Button>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div> */}
 
         {/* CTA Section */}
         <section className="py-20 bg-black text-primary-foreground">
