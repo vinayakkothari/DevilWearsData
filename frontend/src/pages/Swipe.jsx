@@ -1,6 +1,6 @@
 import React from 'react';
 import VerticalNavbar from '../components/NavBar'; 
-import FashionSwiper from '../components/Swipper';
+import FashionSwiper from '../components/Swiper';
 
 export default function MainPage() {
   return (
@@ -12,6 +12,6 @@ export default function MainPage() {
       <div className="flex-grow">
         <FashionSwiper />
       </div>
-    </div>
-  );
+    </div>
+  );
 }

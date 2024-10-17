@@ -57,7 +57,7 @@ const Profile = () => {
 
             <div className="w-3/4 pl-8">
                 <div className="flex justify-between items-center p-4 bg-white shadow mb-4">
-                    <h1 className="text-2xl font-bold">Profile</h1>
+                    <h1 className="text-2xl font-bold">Community Forum</h1>
                 </div>
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
