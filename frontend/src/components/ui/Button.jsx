@@ -8,7 +8,7 @@ const buttonVariants = (variant, size) => {
         destructive: "bg-gradient-to-r from-red-400 to-red-600 text-white-foreground hover:from-red-500 hover:to-red-700",
         outline: "border border-input bg-gradient-to-r from-gray-100 to-gray-300 hover:bg-gradient-to-r from-gray-200 to-gray-400 hover:text-gray-800",
         secondary: "bg-gradient-to-r from-white to-gray-200 text-secondary-foreground hover:bg-gradient-to-r from-white to-gray-300",
-        ghost: "bg-white hover:bg-gradient-to-r from-orange-900 to-orange-950 hover:text-white-foreground",
+        ghost: "bg-white hover:bg-gradient-to-r from-orange-200 to-orange-250 hover:text-white-foreground",
         link: "text-primary underline-offset-4 hover:underline",
     };
     const sizeStyles = {
