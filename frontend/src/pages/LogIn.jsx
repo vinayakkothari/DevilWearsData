@@ -32,7 +32,10 @@ export default function LogIn() {
             const data = await response.json();
             if (response.ok) {
                 // Save token to localStorage or sessionStorage
-                localStorage.setItem('token', data.token); // Assuming 'token' is returned in the response
+                localStorage.setItem('token', data.token); 
+                localStorage.setItem('userId', data.userId); 
+
+                console.log('Login successful:', data);
 
                 // Call login from Auth Context to update state
                 login();

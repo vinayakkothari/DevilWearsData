@@ -22,12 +22,47 @@ export default function Challenges() {
         setIsNavbarExpanded(!isNavbarExpanded);
     };
 
-    const completeChallenge = (challengeId) => {
+    const completeChallenge = async (challengeId) => {
         if (!completedChallenges.includes(challengeId)) {
+            // Add challenge to completed list
             setCompletedChallenges(prevChallenges => [...prevChallenges, challengeId]);
-            // Logic to add points goes here
+    
+            // Get the userId from local storage
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                console.error('No userId found in local storage');
+                return;
+            }
+    
+            try {
+                // Add points for the completed challenge (for example, let's say 10 points)
+                const additionalPoints = 10;
+    
+                // Make a POST request to the backend to update user points
+                const response = await fetch('http://localhost:3000/api/users/updatePoints', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId, // Send the userId
+                        points: additionalPoints, // Send the additional points to be added
+                    }),
+                });
+    
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message);
+                }
+    
+                const data = await response.json();
+                console.log('Points updated successfully:', data);
+            } catch (error) {
+                console.error('Error updating points:', error);
+            }
         }
     };
+    
 
     return (
         <div

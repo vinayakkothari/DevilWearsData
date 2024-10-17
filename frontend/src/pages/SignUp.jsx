@@ -69,7 +69,6 @@ export default function SignUp() {
     
                 // Store the token and userId in localStorage
                 localStorage.setItem('token', token);
-                localStorage.setItem('userId', userId);
     
                 console.log('Signup successful:', data);
     
