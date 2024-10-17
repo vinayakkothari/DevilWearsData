@@ -226,56 +226,34 @@ export default function Dashboard() {
                         </Card>
                     </motion.div>
 
-                    {/* Leaderboard Card */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.6 }}
-                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
-                        data-intro="Check the leaderboard here."
-                    >
-                        <Card className="p-5 h-full">
-                            <CardHeader className="flex items-center">
-                                <TrendingUp className="w-6 h-6 mr-2" />
-                                <CardTitle>Leaderboard</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex flex-col justify-center items-center overflow-hidden">
-                                {renderLeaderboardPodium()}
-                            </CardContent>
-                        </Card>
-                    </motion.div>
+          {/* Leaderboard Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
+            data-intro="Current leaderboard status."
+          >
+            <Card className="p-5 h-full">
+              <CardHeader className="flex items-center">
+                <TrendingUp className="w-6 h-6 mr-2" />
+                <CardTitle>Leaderboard</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-col justify-center items-center">
+                {renderLeaderboardPodium()}
+              </CardContent>
+            </Card>
+          </motion.div>
 
-                    {/* Upcoming Events Card */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.5 }}
-                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
-                        data-intro="This card lists upcoming events."
-                    >
-                        <Card className="p-5 h-full">
-                            <CardHeader className="flex items-center">
-                                <Calendar className="w-6 h-6 mr-2" />
-                                <CardTitle>Upcoming Events</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p>Event: Fashion Week</p>
-                                <p>Date: October 25, 2024</p>
-                                <p>Location: New York</p>
-                            </CardContent>
-                        </Card>
-                    </motion.div>
-                </div>
-
-                {/* Start Tutorial Button */}
-                <button
+          <button
                     onClick={startTutorial}
-                    className="fixed bottom-8 right-8 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 transition"
+                    className="fixed bottom-4 right-8 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 transition"
                     data-intro="Click here to start the tour!"
                 >
                     Start Tutorial
                 </button>
-            </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }

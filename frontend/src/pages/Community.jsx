@@ -27,6 +27,7 @@ const Community = () => {
                 }
 
                 const data = await response.json();
+                console.log(data);
                 setUserProfile(data.user); // Set the user profile data
             } catch (error) {
                 console.error("Error fetching user profile:", error);
@@ -70,7 +71,7 @@ const Community = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const userId = localStorage.getItem('userId') || 'Anonymous'; // Fetch the userId from local storage, fallback to 'Anonymous' if not found
+        const userId = userProfile.username || 'Anonymous'; // Fetch the userId from local storage, fallback to 'Anonymous' if not found
 
         const newMsg = {
             id: messages.length + 1, // Simple ID assignment; consider better unique ID generation in production
