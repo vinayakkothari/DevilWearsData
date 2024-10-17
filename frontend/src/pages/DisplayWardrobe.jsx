@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid'; // Import uuid for unique IDs
+import VerticalNavbar from '../components/NavBar'; // Importing the navbar
+import BackGround from "../assets/Dashboard_bg1.jpg";
 
 const DisplayWardrobe = () => {
   const [images, setImages] = useState([]);
@@ -8,8 +10,8 @@ const DisplayWardrobe = () => {
   const [canvasItems, setCanvasItems] = useState([]);
   const [userId, setUserId] = useState('');
 
-   // Get user ID from local storage
-   useEffect(() => {
+  // Get user ID from local storage
+  useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {
       setUserId(storedUserId);
@@ -79,68 +81,89 @@ const DisplayWardrobe = () => {
   };
 
   return (
-    <div>
-      <h1>Wardrobe</h1>
-      <div>
-        <label htmlFor="category">Select Category: </label>
-        <select
-          id="category"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          <option value="">All</option>
-          {categories.map((category, index) => ( // Added index as a fallback key
-            <option key={`${category}-${index}`} value={category}> {/* Ensure each option has a unique key */}
-              {category}
-            </option>
-          ))}
-        </select>
+    <div
+      className="flex min-h-screen"
+      style={{
+        backgroundImage: `url(${BackGround})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div style={{ width: '250px', flexShrink: 0 }}>
+        <VerticalNavbar />
       </div>
+      <div style={{ flexGrow: 1, padding: '20px' }}>
+        <h1>Wardrobe</h1>
+        <div>
+          <label htmlFor="category">Select Category: </label>
+          <select
+            id="category"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">All</option>
+            {categories.map((category, index) => (
+              <option key={`${category}-${index}`} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="image-gallery flex">
-        {images
-          .filter((image) => !selectedCategory || image.category === selectedCategory)
-          .map((image) => (
+        <div
+          className="image-gallery flex"
+          style={{ display: 'flex', flexWrap: 'wrap', margin: '10px 0' }}
+        >
+          {images
+            .filter((image) => !selectedCategory || image.category === selectedCategory)
+            .map((image) => (
+              <img
+                key={image._id}
+                src={image.preSignedUrl || image.imageUrl}
+                alt={image.name || "Clothing item"}
+                draggable
+                onDragStart={(event) => handleDragStart(event, image)}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "fallback-image-url"; // Replace with a placeholder image
+                }}
+                style={{
+                  margin: "10px",
+                  cursor: "pointer",
+                  width: '100px',
+                  height: '100px',
+                }} // Adjust size if needed
+              />
+            ))}
+        </div>
+
+        <div
+          className="canvas"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+          style={{
+            width: "100%",
+            height: "500px",
+            border: "1px solid black",
+            marginTop: "20px",
+            position: "relative",
+            backgroundColor: "white",
+          }}
+        >
+          {canvasItems.map((item) => (
             <img
-              key={image._id} // Use a stable unique key like _id
-              src={image.preSignedUrl || image.imageUrl} // Use pre-signed URL if available
-              alt={image.name || "Clothing item"}
-              draggable
-              onDragStart={(event) => handleDragStart(event, image)}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = "fallback-image-url"; // Replace with a placeholder image
+              key={item.id}
+              src={item.preSignedUrl || item.imageUrl}
+              alt={item.name || "Clothing item"}
+              style={{
+                position: "absolute",
+                top: `${item.y}px`,
+                left: `${item.x}px`,
+                cursor: "move",
               }}
-              style={{ margin: "10px", cursor: "pointer" }}
             />
           ))}
-      </div>
-
-      <div
-        className="canvas"
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        style={{
-          width: "100%",
-          height: "500px",
-          border: "1px solid black",
-          marginTop: "20px",
-          position: "relative",
-        }}
-      >
-        {canvasItems.map((item) => (
-          <img
-            key={item.id} // Use the unique ID for the canvas item
-            src={item.preSignedUrl || item.imageUrl} // Use pre-signed URL if available
-            alt={item.name || "Clothing item"}
-            style={{
-              position: "absolute",
-              top: `${item.y}px`, // Position based on the drop coordinates
-              left: `${item.x}px`,
-              cursor: "move",
-            }}
-          />
-        ))}
+        </div>
       </div>
     </div>
   );

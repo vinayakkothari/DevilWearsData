@@ -87,7 +87,7 @@ export default function Dashboard() {
         return (
             <div className="flex justify-around items-end">
                 {/* Second Place */}
-                <div className="bg-gray-400 rounded-t-lg flex flex-col items-center justify-end h-12 w-20">
+                <div className="bg-gray-600 rounded-t-lg flex flex-col items-center justify-end h-12 w-20">
                     <span role="img" aria-label="second-place" className="text-3xl">🥈</span>
                     <p className="text-center text-sm font-bold mt-2">{leaderboard[1].user}</p>
                     <p className="text-center text-xs">{leaderboard[1].points} pts</p>

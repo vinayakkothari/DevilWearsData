@@ -28,6 +28,15 @@ function UploadWardrobe() {
     }
   }, []);
 
+  const showWarning = () => {
+    alert("Do not upload an image with a face");
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
+    showWarning(); // Show warning when a file is chosen
+  };
+
   const handleUpload = async (e) => {
     e.preventDefault();
     if (!file) {
@@ -81,7 +90,7 @@ function UploadWardrobe() {
               <input
                 type="file"
                 className="border border-gray-300 p-2 rounded w-full"
-                onChange={(e) => setFile(e.target.files[0])}
+                onChange={handleFileChange} // Updated to use handleFileChange
                 required
               />
             </div>

@@ -42,23 +42,13 @@ export default function Challenges() {
             <VerticalNavbar isExpanded={isNavbarExpanded} onToggle={handleNavbarToggle} />
 
             <div
-                className={`flex-grow transition-all duration-300 ease-in-out ${isNavbarExpanded ? '-ml-64' : 'ml-16'}`}
-                style={{ marginLeft: isNavbarExpanded ? '16rem' : '14rem' }} // Adjusting layout based on navbar state
+                className={`flex-grow transition-all duration-300 ease-in-out ${isNavbarExpanded ? 'ml-16' : 'ml-64'}`}
             >
-                <motion.h1
-                    initial={{ opacity: 0, y: -30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-3xl font-bold text-center text-purple-700 mb-10"
-                >
-                    Take on Challenges & Earn Rewards!
-                </motion.h1>
-
                 <div className="flex justify-between items-center p-4 bg-white shadow">
                     <h1 className="text-2xl font-bold">Community Forum</h1>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
                     {challengesData.map((challenge) => (
                         <motion.div
                             key={challenge.id}
