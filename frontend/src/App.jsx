@@ -5,7 +5,7 @@ import DisplayWardrobe from './pages/DisplayWardrobe.jsx';
 import UploadWardrobe from './pages/UploadWardrobe.jsx';
 import SignUp from './pages/SignUp.jsx';
 import Dashboard from './pages/Dashboard.jsx';
-import FashionSwiper from "./components/Swipper.jsx";
+import FashionSwiper from "./pages/Swipe.jsx";
 import Community from "./pages/Community.jsx";
 import Messages from "./components/Chat.jsx";
 import Challenges from "./pages/Challenges.jsx";
