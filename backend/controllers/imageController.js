@@ -141,6 +141,7 @@ export async function getAllImages(req, res) {
 
       // Fetch pre-signed URLs using the S3 service
       const imagesWithUrls = await fetchImagesWithUrls(images);
+      
       console.log("Got all images for user:", userId);
       
       return res.status(200).json(imagesWithUrls); 

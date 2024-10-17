@@ -20,29 +20,45 @@ const DisplayWardrobe = () => {
     const fetchClothingItems = async () => {
       if (!userId) return; // Don't fetch if userId is not set
       
+      const token = localStorage.getItem('token'); // Get the token from localStorage
+  
+      if (!token) {
+        console.error("No token found in localStorage.");
+        return;
+      }
+  
+      console.log("Token being used:", token); // Log the token to check if it's present
+  
       try {
-        const response = await fetch(`http://localhost:3000/api/images?userId=${userId}`);
+        const response = await fetch(`http://localhost:3000/api/images/images?userId=${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`, // Ensure token is in correct format
+            'Content-Type': 'application/json',
+          }
+        });
+  
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
+  
         const data = await response.json();
-        
+  
         // Ensure the fetched data is an array
         if (!Array.isArray(data)) {
           throw new Error('Fetched data is not an array');
         }
-
+  
         setImages(data);
         setCategories([...new Set(data.map((item) => item.category))]);
       } catch (error) {
         console.error("Error fetching clothing items:", error);
       }
     };
-
+  
     fetchClothingItems();
     console.log("Fetching clothing items for user:", userId);
   }, [userId]);
+  
 
   const handleDragStart = (event, image) => {
     event.dataTransfer.setData("image", JSON.stringify(image));
