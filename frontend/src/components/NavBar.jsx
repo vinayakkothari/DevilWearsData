@@ -23,7 +23,6 @@ import {
 const navItems = [
   { name: 'Profile', icon: UserRoundPen, href: '/profile'},
   { name: 'Home', icon: Home, href: '/dashboard' },
-  { name: 'Liked', icon: Heart, href: '/liked' },    
   { name: 'Upload Item', icon: Camera, href: '/upload'} ,      
   { name: 'Virtual Wardrobe', icon: Briefcase, href: '/display' },
   { name: 'Community', icon: Users, href: '/community' },

@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 import VerticalNavbar from '../components/NavBar'; // Importing the navbar
 import BackGround from "../assets/Dashboard_bg1.jpg";
-import Img1 from "../assets/Img1Liked.jpg";
-import Img2 from "../assets/Img2Liked.jpg";
-import Img3 from "../assets/Img3Liked.jpg";
-import Img4 from "../assets/Img4Liked.jpg";
-import Img5 from "../assets/Img5Liked.jpg";
-import Img6 from "../assets/Img6Liked.jpg";
-
 
 
 const LikedImagesPage = () => {

@@ -4,8 +4,9 @@ import cors from 'cors';
 import http from 'http';
 import { Server } from 'socket.io';
 import imageRoutes from './routes/imageRoutes.js';
-import authRoutes from './routes/authRoutes.js'; // Import auth routes
-import chatRoutes from './routes/chatRoutes.js'; // Import chat routes
+import authRoutes from './routes/authRoutes.js'; 
+import chatRoutes from './routes/chatRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import connectToMongoDb from './database/connectMongo.js';
 
 dotenv.config();
@@ -29,6 +30,7 @@ const PORT = process.env.PORT || 3000;
 app.use('/api/auth', authRoutes); // Authentication routes
 app.use('/api/images', imageRoutes); // Image routes
 app.use('/api/chat', chatRoutes); // Chat routes
+app.use('/api/users', userRoutes); // User routes
 
 // Socket.IO Connection
 io.on('connection', (socket) => {
