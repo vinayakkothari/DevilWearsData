@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import BackGround from "../assets/upload_bg.jpg";
+import BackGround from "../assets/Dashboard_bg1.jpg";
 import VerticalNavbar from '../components/NavBar'; // Importing the navbar
 
 
