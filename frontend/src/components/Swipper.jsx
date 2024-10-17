@@ -43,10 +43,9 @@ export default function FashionSwiper() {
             setCurrentIndex((prevIndex) => prevIndex + 1)
         } else {
             console.log('Swipe session complete. Showing preferences...')
-            // Optional: Display results or handle end of swipes
         }
         setSwipeDirection(null)
-        controls.start({ x: 0, opacity: 1, rotate: 0 }) // Reset animation after each swipe
+        controls.start({ x: 0, opacity: 1, rotate: 0 })
     }
 
     const handleDrag = (event, info) => {
@@ -79,18 +78,23 @@ export default function FashionSwiper() {
 
     return (
         <div className="flex flex-col items-center justify-center h-screen p-4">
-            <Card className="w-full max-w-sm h-full overflow-hidden relative">
+            <motion.div
+                className="w-full max-w-sm h-full overflow-hidden relative rounded-lg"
+                style={{
+                    backgroundColor: swipeDirection === 'right' ? 'rgba(34, 197, 94, 0.2)' : swipeDirection === 'left' ? 'rgba(239, 68, 68, 0.2)' : 'white'
+                }}
+            >
                 <motion.div
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
                     onDrag={handleDrag}
                     onDragEnd={handleDragEnd}
                     animate={controls}
-                    className="cursor-grab active:cursor-grabbing h-full"
+                    className="cursor-grab active:cursor-grabbing h-full rounded-lg"
                     whileTap={{ scale: 0.95 }}
                     style={{ x: 0, rotate: 0 }}
                 >
-                    <CardContent className="p-0 relative h-full">
+                    <CardContent className="p-0 relative h-full rounded-lg">
                         <img
                             src={currentItem.image}
                             alt={currentItem.name}
@@ -116,7 +120,7 @@ export default function FashionSwiper() {
                 >
                     NOPE
                 </motion.div>
-            </Card>
+            </motion.div>
             <p className="mt-4 text-white">Swipe Count: {swipeCount}</p>
             {swipeCount < 5 ? (
                 <p className="mt-2 text-white text-sm">Swipe right to like, left to dislike</p>
@@ -126,3 +130,4 @@ export default function FashionSwiper() {
         </div>
     )
 }
+
