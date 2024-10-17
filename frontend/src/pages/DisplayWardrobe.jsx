@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid'; // Import uuid for unique IDs
 import VerticalNavbar from '../components/NavBar'; // Importing the navbar
+import BackGround from "../assets/Dashboard_bg1.jpg";
 
 const DisplayWardrobe = () => {
   const [images, setImages] = useState([]);
@@ -80,8 +81,15 @@ const DisplayWardrobe = () => {
   };
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <div style={{ width: '250px', flexShrink: 0 }}> {/* Fixed width for navbar */}
+    <div
+      className="flex min-h-screen"
+      style={{
+        backgroundImage: `url(${BackGround})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div style={{ width: '250px', flexShrink: 0 }}>
         <VerticalNavbar />
       </div>
       <div style={{ flexGrow: 1, padding: '20px' }}>
@@ -139,6 +147,7 @@ const DisplayWardrobe = () => {
             border: "1px solid black",
             marginTop: "20px",
             position: "relative",
+            backgroundColor: "white",
           }}
         >
           {canvasItems.map((item) => (
@@ -161,5 +170,3 @@ const DisplayWardrobe = () => {
 };
 
 export default DisplayWardrobe;
-
-
