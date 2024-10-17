@@ -48,24 +48,17 @@ export async function getSignedUrlForS3Object(key) {
 
 
 export async function fetchImagesWithUrls(images) {
-  if (!Array.isArray(images)) {
-    throw new Error('Input should be an array of images');
-  }
+  const [myAWSBucket, s3Client] = setup();
 
-  const imagesWithUrls = await Promise.all(images.map(async (image) => {
-    // Ensure image is defined and properly formatted
-    if (!image || !image.imageUrl) { // Check for imageUrl instead of image
-      throw new Error('Invalid image data');
-    }
-
-    const key = image.imageUrl.split('/').pop(); // Extract the file name from the URL
+  // Generate pre-signed URLs for each image
+  const imagesWithUrls = await Promise.all(images.map(async (img) => {
+    const key = img.image ? img.image.split('/').pop() : ''; // Extract the file name from the URL
     const preSignedUrl = await getSignedUrlForS3Object(key); // Generate pre-signed URL
-
     return {
-      ...image,
+      ...img,
       preSignedUrl, // Add pre-signed URL to the image object
     };
   }));
 
-  return imagesWithUrls; // Return the array of images with URLs
+  return imagesWithUrls;
 }

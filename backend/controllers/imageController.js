@@ -84,15 +84,15 @@ export async function handleImageUpload(req, res) {
   if (!file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
-
-  const originalFileName = file.originalname;
+  const extension = file.originalname.split('.').pop();
+  const FileName = `${Date.now()}.${extension}`;
 
   try {
     // Remove background from the image
     const imageWithoutBg = await removeBackground(file.buffer); // Assuming this function processes the file correctly
 
     // Upload the processed image to S3 and get the image URL
-    const imageUrl = await uploadToS3(imageWithoutBg, originalFileName, file.mimetype);
+    const imageUrl = await uploadToS3(imageWithoutBg, FileName, file.mimetype);
 
     // Access MongoDB collection
     const db = mongoose.connection.db;
@@ -126,6 +126,7 @@ export async function handleImageUpload(req, res) {
 }
 export async function getAllImages(req, res) {
   try {
+    console.log("Inside getAllImages");
     const { userId } = req.query;
     if (!userId) {
       return res.status(400).json({ message: "User ID is required" });
@@ -139,13 +140,17 @@ export async function getAllImages(req, res) {
     const db = mongoose.connection.db;
     const collection = db.collection('clothings');
 
+    
     // Fetch all images for the specific user
     const images = await collection.find({ userId }).toArray();
-
+    
     // Ensure the images have valid data before proceeding
     if (!Array.isArray(images) || images.length === 0) {
       return res.status(404).json({ message: "No images found" });
     }
+
+    // Inside getAllImages, after fetching images
+    console.log("Fetched images:", images);
 
     // Fetch pre-signed URLs using the S3 service
     const imagesWithUrls = await fetchImagesWithUrls(images);
