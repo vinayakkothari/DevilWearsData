@@ -28,6 +28,8 @@ const navItems = [
   { name: 'Community', icon: Users, href: '/community' },
   { name: 'Challenges', icon: Award, href: '/challenges' },
   { name: 'MoodBoards', icon: Image, href: '/moodboards' },
+  { name: 'Seek Miranda\'s Help', icon: Users, href: 'https://mirandadwd.streamlit.app/', style: { color: 'grey' }  },
+  { name: 'Seek Fashion Stylist AI\'s Help', icon: Users, href: 'https://mystylist.streamlit.app/', style: { color: 'grey' }  },
   { name: 'Log Out', icon: LogOut, href: '/'},
 ];
 

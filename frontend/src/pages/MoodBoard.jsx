@@ -15,8 +15,8 @@ const MoodBoard = () => {
     const boards = [
         {
             id: 1,
-            title: 'Casual Men\'s',
-            embedId: '930204498029462219',
+            title: 'Casual Women\'s',
+            embedId: '343821752810423379',
         },
         {
             id: 2,

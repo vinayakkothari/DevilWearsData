@@ -105,36 +105,42 @@ const Community = () => {
             
             {/* Main Content */}
             <div className={`flex-grow p-4 transition-all duration-300 ease-in-out ${isNavbarExpanded ? 'ml-16' : 'ml-64'}`}>
-                {/* Chat Messages Container */}
-                <div className="p-4 overflow-y-auto bg-gray-200 shadow-md mx-4 my-2 rounded-lg flex-grow">
-                    <h1 className="text-2xl font-bold mb-4">Community Chat</h1>
-                    {messages.map((msg) => (
-                        <div key={msg.id} className="mb-4">
-                            <div className="font-bold">{msg.sender}</div>
-                            <div>{msg.content}</div>
-                            <div className="text-gray-500 text-xs">
-                                {new Date(msg.timestamp).toLocaleString()}
+                {/* Community Chat and Input Box Container */}
+                <div className="flex flex-col h-full">
+                    {/* Chat Messages Container */}
+                    <div className="p-4 overflow-y-auto bg-gray-200 shadow-md mx-4 my-2 rounded-lg flex-grow">
+                        <h1 className="text-2xl font-bold mb-4">Community Chat</h1>
+                        {messages.map((msg) => (
+                            <div key={msg.id} className="mb-4">
+                                <div className="font-bold">{msg.sender}</div>
+                                <div>{msg.content}</div>
+                                <div className="text-gray-500 text-xs">
+                                    {new Date(msg.timestamp).toLocaleString()}
+                                </div>
+                                <hr className="my-2 border-gray-300" />
                             </div>
-                            <hr className="my-2 border-gray-300" />
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
 
-                {/* Input Form */}
-                <div className="p-4 bg-gray-200 shadow mt-4">
-                    <form onSubmit={handleSubmit} className="flex">
-                        <input
-                            type="text"
-                            value={newMessage}
-                            onChange={(e) => setNewMessage(e.target.value)}
-                            placeholder="Type a message"
-                            required
-                            className="flex-grow border border-gray-300 rounded-lg p-2"
-                        />
-                        <button type="submit" className="ml-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700">
-                            Send
-                        </button>
-                    </form>
+                    {/* Input Form */}
+                    <div className="p-4 bg-gray-200 shadow mt-4 rounded-lg mx-4">
+                        <form onSubmit={handleSubmit} className="flex items-center w-full">
+                            <input
+                                type="text"
+                                value={newMessage}
+                                onChange={(e) => setNewMessage(e.target.value)}
+                                placeholder="Type a message..."
+                                required
+                                className="flex-grow border border-gray-300 rounded-full p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                            <button
+                                type="submit"
+                                className="ml-2 px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 transition duration-300"
+                            >
+                                Send
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

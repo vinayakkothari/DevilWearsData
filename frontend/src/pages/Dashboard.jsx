@@ -24,7 +24,7 @@ import rainAnimation from "../assets/animations/rainy.json";
 const fetchWeather = async (city) => {
   const apiKey = "00eb636dc8f3517f196f5647f4aa8fe3"; // Replace with your OpenWeather API key
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
   );
   const data = await response.json();
   return {
@@ -86,190 +86,198 @@ export default function Dashboard() {
   // Function to render appropriate weather animation based on weather type
   const renderWeatherAnimation = () => {
     return (
-      <div className="flex justify-center items-center">
-        <Player
-          autoplay
-          loop
-          src={
-            weather.weather === "clear"
-              ? sunnyAnimation
-              : weather.weather === "clouds"
-              ? cloudyAnimation
-              : weather.weather === "rain"
-              ? rainAnimation
-              : sunnyAnimation
-          }
-          className="weather-animation" // Apply sizing here
-          style={{ width: "150px", height: "150px" }} // Set specific size
-        />
-      </div>
+        <div className="flex justify-center items-center">
+          <Player
+              autoplay
+              loop
+              src={
+                weather.weather === "clear"
+                    ? sunnyAnimation
+                    : weather.weather === "clouds"
+                        ? cloudyAnimation
+                        : weather.weather === "rain"
+                            ? rainAnimation
+                            : sunnyAnimation
+              }
+              className="weather-animation" // Apply sizing here
+              style={{ width: "150px", height: "150px" }} // Set specific size
+          />
+        </div>
     );
   };
 
   // Function to render the podium for the leaderboard
   const renderLeaderboardPodium = () => {
     return (
-      <div className="flex justify-around items-end">
-        {/* Second Place */}
-        <div className="bg-gray-600 rounded-t-lg flex flex-col items-center justify-end h-12 w-20">
+        <div className="flex justify-around items-end">
+          {/* Second Place */}
+          <div className="bg-gray-600 rounded-t-lg flex flex-col items-center justify-end h-12 w-20">
           <span role="img" aria-label="second-place" className="text-3xl">
             🥈
           </span>
-          <p className="text-center text-sm font-bold mt-2">
-            {leaderboard[1].user}
-          </p>
-          <p className="text-center text-xs">{leaderboard[1].points} pts</p>
-        </div>
+            <p className="text-center text-sm font-bold mt-2">
+              {leaderboard[1].user}
+            </p>
+            <p className="text-center text-xs">{leaderboard[1].points} pts</p>
+          </div>
 
-        {/* First Place */}
-        <div className="bg-yellow-400 rounded-t-lg flex flex-col items-center justify-end h-30 w-20">
+          {/* First Place */}
+          <div className="bg-yellow-400 rounded-t-lg flex flex-col items-center justify-end h-30 w-20">
           <span role="img" aria-label="first-place" className="text-3xl">
             🥇
           </span>
-          <p className="text-center text-sm font-bold mt-2">
-            {leaderboard[0].user}
-          </p>
-          <p className="text-center text-xs">{leaderboard[0].points} pts</p>
-        </div>
+            <p className="text-center text-sm font-bold mt-2">
+              {leaderboard[0].user}
+            </p>
+            <p className="text-center text-xs">{leaderboard[0].points} pts</p>
+          </div>
 
-        {/* Third Place */}
-        <div className="bg-orange-500 rounded-t-lg flex flex-col items-center justify-end h-10 w-20">
+          {/* Third Place */}
+          <div className="bg-orange-500 rounded-t-lg flex flex-col items-center justify-end h-10 w-20">
           <span role="img" aria-label="third-place" className="text-3xl">
             🥉
           </span>
-          <p className="text-center text-sm font-bold mt-2">
-            {leaderboard[2].user}
-          </p>
-          <p className="text-center text-xs">{leaderboard[2].points} pts</p>
+            <p className="text-center text-sm font-bold mt-2">
+              {leaderboard[2].user}
+            </p>
+            <p className="text-center text-xs">{leaderboard[2].points} pts</p>
+          </div>
         </div>
-      </div>
     );
   };
 
   return (
-    <div
-      className="flex min-h-screen"
-      style={{
-        backgroundImage: `url(${BackGround})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <VerticalNavbar
-        isExpanded={isNavbarExpanded}
-        onToggle={handleNavbarToggle}
-      />
       <div
-        className={`flex-grow p-8 transition-all duration-300 ease-in-out ${
-          isNavbarExpanded ? "-ml-64" : "ml-16"
-        }`}
-        style={{ marginLeft: isNavbarExpanded ? "16rem" : "14rem" }} // Ensure spacing from the navbar
+          className="flex min-h-screen"
+          style={{
+            backgroundImage: `url(${BackGround})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Swipe Through Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
-            data-intro="Click to Swipe."
-          >
-            <Card className="p-5 h-full">
-              <CardHeader className="flex items-center">
-                <HandIcon className="w-6 h-6 mr-2" />
-                <CardTitle>Swipe through!</CardTitle>
-              </CardHeader>
-              <CardContent className="flex justify-center items-center">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="mt-8 py-3 px-6 text-lg font-semibold rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white transform hover:scale-105 transition-transform duration-300 ease-in-out"
-                  onClick={() => navigate("/swipe")}
-                >
-                  Start Swiping
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
+        <VerticalNavbar
+            isExpanded={isNavbarExpanded}
+            onToggle={handleNavbarToggle}
+        />
+        <div
+            className={`flex-grow p-8 transition-all duration-300 ease-in-out ${
+                isNavbarExpanded ? "-ml-64" : "ml-16"
+            }`}
+            style={{ marginLeft: isNavbarExpanded ? "16rem" : "14rem" }} // Ensure spacing from the navbar
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Swipe Through Card */}
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
+                data-intro="Click to Swipe."
+            >
+              <Card className="p-5 h-full">
+                <CardHeader className="flex items-center">
+                  <HandIcon className="w-6 h-6 mr-2" />
+                  <CardTitle>Swipe through!</CardTitle>
+                </CardHeader>
+                <CardContent className="flex justify-center items-center">
+                  <Button
+                      variant="primary"
+                      size="lg"
+                      className="mt-8 py-3 px-6 text-lg font-semibold rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white transform hover:scale-105 transition-transform duration-300 ease-in-out"
+                      onClick={() => navigate("/swipe")}
+                  >
+                    Start Swiping
+                  </Button>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-          {/* Weather Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-gray-400 rounded-xl shadow-md p-4 h-72"
-            data-intro="Current weather condition."
-          >
-            <Card className="p-5 h-full">
-              <CardHeader className="flex items-center">
-                <Sun className="w-6 h-6 mr-2" />
-                <CardTitle>Weather Info</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col justify-center items-center relative">
-                {/* Temperature and City on Top */}
-                <p className="text-lg font-semibold">{weather.temperature}°C</p>
-                <p className="text-sm font-light">in {city}</p>
+            {/* Weather Card */}
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="bg-gray-400 rounded-xl shadow-md p-4 h-72"
+                data-intro="Current weather condition."
+            >
+              <Card className="p-5 h-full">
+                <CardHeader className="flex items-center">
+                  <Sun className="w-6 h-6 mr-2" />
+                  <CardTitle>Weather Info</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col justify-center items-center relative">
+                  {/* Temperature and City on Top */}
+                  <p className="text-lg font-semibold">{weather.temperature}°C</p>
+                  <p className="text-sm font-light">in {city}</p>
 
-                {/* Weather Animation */}
-                <div className="absolute top-[calc(50%-40px)] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-0">{renderWeatherAnimation()}</div>
+                  {/* Weather Animation */}
+                  <div className="absolute top-[calc(50%-40px)] left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50 z-0">{renderWeatherAnimation()}</div>
 
-                {/* Weather Description */}
-                <p className="mt-2">
-                  {weather.weather?.charAt(0).toUpperCase() +
-                    weather.weather?.slice(1)}
-                </p>    
+                  {/* Weather Description */}
+                  <p className="mt-2">
+                    {weather.weather?.charAt(0).toUpperCase() +
+                        weather.weather?.slice(1)}
+                  </p>
 
-                {/* Input for City */}
-                <input
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  className="border rounded p-1 text-sm w-40 mt-2" // Adjusted styling
-                  placeholder="Enter city name"
-                />
-              </CardContent>
-            </Card>
-          </motion.div>
+                  {/* Input for City */}
+                  <input
+                      type="text"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                      className="border rounded p-1 text-sm w-40 mt-2" // Adjusted styling
+                      placeholder="Enter city name"
+                  />
+                </CardContent>
+              </Card>
+            </motion.div>
 
-          {/* Festival Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
-            data-intro="Current month festival."
-          >
-            <Card className="p-5 h-full">
-              <CardHeader className="flex items-center">
-                <Calendar className="w-6 h-6 mr-2" />
-                <CardTitle>Upcoming Festival</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col justify-center items-center">
-                <p className="text-lg font-semibold">{upcomingFestival}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
+            {/* Festival Card */}
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
+                data-intro="Current month festival."
+            >
+              <Card className="p-5 h-full">
+                <CardHeader className="flex items-center">
+                  <Calendar className="w-6 h-6 mr-2" />
+                  <CardTitle>Upcoming Festival</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col justify-center items-center">
+                  <p className="text-lg font-semibold">{upcomingFestival}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
 
-          {/* Leaderboard Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
-            data-intro="Current leaderboard status."
-          >
-            <Card className="p-5 h-full">
-              <CardHeader className="flex items-center">
-                <TrendingUp className="w-6 h-6 mr-2" />
-                <CardTitle>Leaderboard</CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col justify-center items-center">
-                {renderLeaderboardPodium()}
-              </CardContent>
-            </Card>
-          </motion.div>
+            {/* Leaderboard Card */}
+            <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
+                data-intro="Current leaderboard status."
+            >
+              <Card className="p-5 h-full">
+                <CardHeader className="flex items-center">
+                  <TrendingUp className="w-6 h-6 mr-2" />
+                  <CardTitle>Leaderboard</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col justify-center items-center">
+                  {renderLeaderboardPodium()}
+                </CardContent>
+              </Card>
+            </motion.div>
+
+            <button
+                onClick={startTutorial}
+                className="fixed bottom-4 right-8 bg-blue-600 text-white px-4 py-2 rounded-full shadow-lg hover:bg-blue-500 transition"
+                data-intro="Click here to start the tour!"
+            >
+              Start Tutorial
+            </button>
+          </div>
         </div>
       </div>
-    </div>
   );
 }
