@@ -262,7 +262,7 @@ function UploadWardrobe() {
 
             <button
               type="submit"
-              className="w-full bg-red-400 text-white py-2 rounded-lg hover:bg-red-500 transition duration-300"
+              className="w-full bg-red-400 text-white py-2 rounded-lg hover:bg-red-500 transition duration-300 mt-4"
             >
               Upload
             </button>
