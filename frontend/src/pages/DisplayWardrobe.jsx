@@ -5,11 +5,22 @@ const DisplayWardrobe = () => {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [canvasItems, setCanvasItems] = useState([]);
+  const [userId, setUserId] = useState('');
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId); // Set the userId state with the value from localStorage
+    } else {
+      console.log("No userId found in localStorage.");
+    }
+  }, []);
+  
 
   useEffect(() => {
     const fetchClothingItems = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/images/");
+        const response = await fetch(`http://localhost:3000/api/images?userId=${userId}`); // Pass userId as a query parameter
         const data = await response.json();
         setImages(data);
         setCategories([...new Set(data.map((item) => item.category))]);
@@ -17,9 +28,12 @@ const DisplayWardrobe = () => {
         console.error("Error fetching clothing items:", error);
       }
     };
-    fetchClothingItems();
-    console.log("Fetching clothing items...");
-  }, []);
+  
+    if (userId) {
+      fetchClothingItems();
+      console.log("Fetching clothing items for user:", userId);
+    }
+  }, [userId]);
 
   const handleDragStart = (event, image) => {
     event.dataTransfer.setData("image", JSON.stringify(image));
@@ -28,7 +42,11 @@ const DisplayWardrobe = () => {
   const handleDrop = (event) => {
     event.preventDefault();
     const image = JSON.parse(event.dataTransfer.getData("image"));
-    setCanvasItems((prevItems) => [...prevItems, image]);
+    const canvasRect = event.target.getBoundingClientRect();
+    const x = event.clientX - canvasRect.left;
+    const y = event.clientY - canvasRect.top;
+    
+    setCanvasItems((prevItems) => [...prevItems, { ...image, x, y }]);
   };
 
   const handleDragOver = (event) => {
@@ -67,13 +85,14 @@ const DisplayWardrobe = () => {
               draggable
               onDragStart={(event) => handleDragStart(event, image)}
               onError={(e) => {
-                e.target.onerror = null; 
+                e.target.onerror = null;
                 e.target.src = "fallback-image-url"; // Replace with a placeholder image
               }}
               style={{ margin: "10px", cursor: "pointer" }}
             />
           ))}
       </div>
+
       <div
         className="canvas"
         onDrop={handleDrop}
@@ -89,12 +108,13 @@ const DisplayWardrobe = () => {
         {canvasItems.map((item, index) => (
           <img
             key={index}
-            src={item.preSignedUrl || item.imageUrl} // Use pre-signed URL if available
+            src={item.preSignedUrl || item.imageUrl}
             alt={item.name || "Clothing item"}
             style={{
               position: "absolute",
-              top: `${index * 10}px`,
-              left: `${index * 10}px`,
+              top: `${item.y}px`,
+              left: `${item.x}px`,
+              cursor: "move",
             }}
           />
         ))}

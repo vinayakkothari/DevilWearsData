@@ -21,6 +21,7 @@ export default function LogIn() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
         try {
             const response = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
@@ -29,24 +30,33 @@ export default function LogIn() {
                 },
                 body: JSON.stringify(formData),
             });
+    
             const data = await response.json();
+    
             if (response.ok) {
-                // Save token to localStorage or sessionStorage
-                localStorage.setItem('token', data.token); // Assuming 'token' is returned in the response
-
-                // Call login from Auth Context to update state
-                login();
-
-                // Redirect to dashboard or any protected route
-                navigate('/dashboard');
+                // Ensure token and userId are present in the response
+                if (data.token && data.userId) {
+                    // Save token and userId to localStorage
+                    localStorage.setItem('token', data.token); // Save the token
+                    localStorage.setItem('userId', data.userId); // Save the userId or user data
+    
+                    // Call login from Auth Context to update state
+                    login();
+    
+                    // Redirect to dashboard or any protected route
+                    navigate('/dashboard');
+                } else {
+                    throw new Error('Missing token or userId from the server');
+                }
             } else {
-                throw new Error(data.message);
+                throw new Error(data.message || 'Login failed');
             }
         } catch (error) {
             console.error('Login failed:', error);
             alert('Something went wrong, please try again');
         }
     };
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-500 via-gray-800 to-black">

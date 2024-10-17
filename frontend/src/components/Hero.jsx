@@ -33,9 +33,6 @@ function Hero() {
               <Button variant="secondary" size="sm" onClick={() => navigate('/login')}>
                 Log In
               </Button>
-              <Button variant="secondary" size="sm" onClick={() => navigate('/swipe')}>
-                Swipe
-              </Button>
               <Button variant="secondary" size="sm" onClick={() => navigate('/signup')}>
                 Sign Up
               </Button>

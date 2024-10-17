@@ -79,14 +79,13 @@ import mongoose from "mongoose";
 export async function handleImageUpload(req, res) {
   // Access the file and form data
   const file = req.file; // multer populates req.file
-  const { gender, masterCat, subCat, ctype, color, season, usage, tags } = req.body; // Access other fields from req.body
+  const { gender, masterCat, subCat, ctype, color, season, usage, tags,userId } = req.body; // Access other fields from req.body
 
   if (!file) {
     return res.status(400).json({ message: 'No file uploaded' });
   }
 
   const originalFileName = file.originalname;
-  const userId = req.user.username; // **Associating User ID**
 
   try {
     // Remove background from the image
@@ -128,15 +127,22 @@ export async function handleImageUpload(req, res) {
 
 export async function getAllImages(req, res) {
   try {
+    const { userId } = req.query; // Get userId from query parameter
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
     const db = mongoose.connection.db;
     const collection = db.collection('clothings');
 
-    // Fetch all images from the collection, optionally filter by user ID
-    const images = await collection.find({ userId: req.user._id }).toArray(); // **Fetch images for the logged-in user**
+    // Fetch all images for the specific user
+    const images = await collection.find({ userId }).toArray(); // Match userId
 
     // Fetch pre-signed URLs using the S3 service
     const imagesWithUrls = await fetchImagesWithUrls(images);
-    console.log("Got all images for user:", req.user._id);
+    console.log("Got all images for user:", userId);
+    
     return res.status(200).json(imagesWithUrls); 
     
   } catch (error) {
@@ -144,3 +150,4 @@ export async function getAllImages(req, res) {
     return res.status(500).json({ message: error.message });
   }
 }
+

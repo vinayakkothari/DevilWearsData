@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect,useState } from 'react';
 import axios from 'axios';
 import BackGround from "../assets/upload_bg.jpg";
 
@@ -13,6 +13,15 @@ function UploadWardrobe() {
   const [usage, setUsage] = useState('');
   const [tags, setTags] = useState('');
   const [userId, setUserId] = useState('');
+
+  useEffect(() => {
+    const storedUserId = localStorage.getItem('userId');
+    if (storedUserId) {
+      setUserId(storedUserId); // Set the userId state with the value from localStorage
+    } else {
+      console.log("No userId found in localStorage.");
+    }
+  }, []);
 
   const handleUpload = async (e) => {
     e.preventDefault();

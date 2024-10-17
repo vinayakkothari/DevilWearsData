@@ -11,6 +11,7 @@ import connectToMongoDb from './database/connectMongo.js';
 dotenv.config();
 
 const app = express();
+app.use(cors());
 const server = http.createServer(app); // Create HTTP server
 const io = new Server(server, {
     cors: {
