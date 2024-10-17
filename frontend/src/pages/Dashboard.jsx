@@ -19,7 +19,7 @@ import rainAnimation from '../assets/animations/rainy.json';
 // Function to fetch weather data
 const fetchWeather = async () => {
     const apiKey = '00eb636dc8f3517f196f5647f4aa8fe3'; // Replace with your OpenWeather API key
-    const city = 'Manipal';
+    const city = 'Bahrain';
     const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
     );
@@ -176,7 +176,7 @@ export default function Dashboard() {
                                         </div>
                                         <div className="relative z-10">
                                             <p className="text-center text-lg mt-4">
-                                                {weather.weather.charAt(0).toUpperCase() + weather.weather.slice(1)} in Manipal
+                                                {weather.weather.charAt(0).toUpperCase() + weather.weather.slice(1)} in Bahrain
                                             </p>
                                             <p className="text-center text-sm">Temperature: {weather.temperature}°C</p>
                                         </div>
@@ -212,18 +212,28 @@ export default function Dashboard() {
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.5 }}
-                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72" // Grey color for challenges card
+                        className="bg-gray-400 rounded-xl shadow-md p-4 h-72 relative" // Added relative position for overlay
+                        style={{
+                            backgroundImage: "url('../src/assets/diwali.jpg')", // Add your image path here
+                            backgroundSize: "cover", // Ensures the image covers the entire card
+                            backgroundPosition: "center", // Centers the image within the card
+                            backgroundRepeat: "no-repeat", // Prevents image repetition
+                        }}
                         data-intro="This card lists upcoming events."
                     >
-                        <Card className="p-5 h-full">
-                            <CardHeader className="flex items-center">
+                        {/* Semi-transparent overlay for better text readability */}
+                        <div className="absolute inset-0 bg-black opacity-40 rounded-xl"></div>
+                        
+                        {/* Card content */}
+                        <Card className="relative p-5 h-full z-10"> 
+                            <CardHeader className="flex items-center text-white">
                                 <Calendar className="w-6 h-6 mr-2" />
                                 <CardTitle>Upcoming Events</CardTitle>
                             </CardHeader>
-                            <CardContent>
-                                <p>Event: Fashion Week</p>
-                                <p>Date: October 25, 2024</p>
-                                <p>Location: New York</p>
+                            <CardContent className="text-white">
+                                <p>Event: Diwali</p>
+                                <p>Date: November 1, 2024</p>
+                                <p>Location: India</p>
                             </CardContent>
                         </Card>
                     </motion.div>
