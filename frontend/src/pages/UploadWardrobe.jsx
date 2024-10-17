@@ -12,7 +12,7 @@ function UploadWardrobe() {
   const [season, setSeason] = useState('');
   const [usage, setUsage] = useState('');
   const [tags, setTags] = useState('');
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState('yourUserIdHere');
 
   useEffect(() => {
     const storedUserId = localStorage.getItem('userId');
@@ -248,3 +248,4 @@ function UploadWardrobe() {
 }
 
 export default UploadWardrobe;
+

@@ -11,17 +11,21 @@ import {
   Award,
   MessageCircle,
   Image,
-  Settings,
   Menu,
-  X
+  X,
+  Heart,    
+  Briefcase,
+  Camera,
 } from 'lucide-react';
 
 const navItems = [
-  { name: 'Home', icon: Home, href: '/' },
+  { name: 'Home', icon: Home, href: '/dashboard' },
+  { name: 'Liked', icon: Heart, href: '/liked' },    
+  { name: 'Upload Item', icon: Camera, href: '/upload'} ,      
+  { name: 'Virtual Wardrobe', icon: Briefcase, href: '/wardrobe' },
   { name: 'Community', icon: Users, href: '/community' },
   { name: 'Challenges', icon: Award, href: '/challenges' },
   { name: 'MoodBoards', icon: Image, href: '/moodboards' },
-  { name: 'Settings', icon: Settings, href: '/settings' },
 ];
 
 export default function VerticalNavbar() {
