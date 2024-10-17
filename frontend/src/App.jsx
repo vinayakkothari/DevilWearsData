@@ -11,23 +11,27 @@ import Messages from "./components/Chat.jsx";
 import Challenges from "./pages/Challenges.jsx";
 import MoodBoard from "./pages/MoodBoard.jsx";
 import Profile from "./pages/Profile.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/profile" element={<Profile/>}></Route>
-        <Route path="/moodboards" element={<MoodBoard/>}></Route>
-        <Route path="/challenges" element={<Challenges/>}></Route>
         <Route path="/" element={<MainPage/>}></Route>
         <Route path="/login" element={<LogIn/>}></Route>
         <Route path="/signup" element={<SignUp/>}></Route>
+
+        <Route element={<ProtectedRoute />}>
         <Route path='/display' element={<DisplayWardrobe/>}></Route>
         <Route path='/upload' element={<UploadWardrobe/>}></Route>
         <Route path='/dashboard' element={<Dashboard/>}></Route>
         <Route path='/swipe' element={<FashionSwiper/>}></Route>
         <Route path='/community' element={<Community/>}></Route>
         <Route path='/message' element={<Messages/>}></Route>
+        <Route path="/profile" element={<Profile/>}></Route>
+        <Route path="/moodboards" element={<MoodBoard/>}></Route>
+        <Route path="/challenges" element={<Challenges/>}></Route>
+        </Route>
       </Routes>
     </Router>
   );
