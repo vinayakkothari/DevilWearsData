@@ -24,6 +24,6 @@ mongoose.connect(process.env.MONGO_URI, {
 app.post('/login', loginUser);
 app.post('/signup', signupUser);
 
-app.listen(5000, () => {
-    console.log('Server is running on port 5000');
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
 });

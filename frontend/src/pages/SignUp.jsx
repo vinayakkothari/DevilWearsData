@@ -55,15 +55,25 @@ export default function SignUp() {
                     },
                     body: JSON.stringify(formData),
                 });
-
+    
                 if (!response.ok) {
                     const data = await response.json();
                     throw new Error(data.message);
                 }
-
+    
+                // Get the data from the response
                 const data = await response.json();
+    
+                // Extract the token and userId from the response data
+                const { token, userId } = data;
+    
+                // Store the token and userId in localStorage
+                localStorage.setItem('token', token);
+                localStorage.setItem('userId', userId);
+    
                 console.log('Signup successful:', data);
-                // Redirect to dashboard
+    
+                // Redirect to the dashboard
                 navigate('/dashboard');
             } catch (error) {
                 console.error('Signup failed:', error);
@@ -71,7 +81,7 @@ export default function SignUp() {
             }
         }
     };
-
+    
     return (
         <div className="min-h-screen flex items-center justify-center bg-black relative">
             <img src={Back} alt="Background" className="absolute inset-0 w-full h-full object-cover opacity-50" />

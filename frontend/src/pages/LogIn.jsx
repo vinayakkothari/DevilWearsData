@@ -2,13 +2,17 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '../components/ui/Button';
 import { Input } from '../components/ui/Input';
-import Devil from "../assets/698454.jpg"
+import Devil from "../assets/698454.jpg";
+import { useAuth } from '../AuthContext'; 
+import { useNavigate } from 'react-router-dom'; 
 
 export default function LogIn() {
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+    const { login } = useAuth(); // Get login function from Auth Context
+    const navigate = useNavigate(); // For redirecting after login
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -18,7 +22,7 @@ export default function LogIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch('/login', {
+            const response = await fetch('http://localhost:3000/api/auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -27,8 +31,14 @@ export default function LogIn() {
             });
             const data = await response.json();
             if (response.ok) {
-                // Handle successful login (e.g., store token, redirect)
-                console.log('Login successful:', data);
+                // Save token to localStorage or sessionStorage
+                localStorage.setItem('token', data.token); // Assuming 'token' is returned in the response
+
+                // Call login from Auth Context to update state
+                login();
+
+                // Redirect to dashboard or any protected route
+                navigate('/dashboard');
             } else {
                 throw new Error(data.message);
             }
